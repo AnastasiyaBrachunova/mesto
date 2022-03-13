@@ -1,0 +1,11 @@
+.header{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 200px * 2);
+    height: 74px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    border-bottom:  1px solid #545454;
+    margin: 45px auto 40px;
+}
