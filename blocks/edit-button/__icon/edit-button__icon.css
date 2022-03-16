@@ -1,0 +1,12 @@
+.edit-button__icon {
+  width: 10px;
+  height: 10px;
+  object-fit: contain;
+  object-position: center;
+}
+@media (max-width: 540px) {
+  .edit-button__icon {
+    max-width: 7.5px;
+    max-height: 7.5px;
+  }
+}

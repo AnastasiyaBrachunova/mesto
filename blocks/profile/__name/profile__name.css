@@ -1,0 +1,24 @@
+.profile__name {
+  max-width: 294px;
+  font-family: Inter, Georgia, "Times New Roman", Times, serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 114%;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+}
+@media (max-width: 780px) {
+  .profile__name {
+    font-size: calc(100vw / 18.6);
+  }
+}
+
+@media (max-width: 540px) {
+  .profile__name {
+    max-width: 189px;
+    margin: 0 10px 10px 0;
+    font-size: 27px;
+    line-height: 33px;
+  }
+}

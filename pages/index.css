@@ -1,7 +1,38 @@
 @import url(../vendor/fonts.css);
 @import url(../vendor/normalize.css);
 @import url(../blocks/page/page.css);
+@import url(../blocks/button/button.css);
+
 /*------------header------------------*/
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/container.css);
+/*-----------form--------------------------*/
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__button-close/form__button-close.css);
+@import url(../blocks/form/__button-submit/form__button-submit.css);
+@import url(../blocks/form/__heading/form__heading.css);
+@import url(../blocks/form/__input-container/form__input-container.css);
+@import url(../blocks/form/__name-info/form__name-info.css);
+@import url(../blocks/close-icon/close-icon.css);
+@import url(../blocks/form-container/form-container.css);
+/*-----------------profile--------------------*/
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__job/profile__job.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/add-button/add-button.css);
+@import url(../blocks/add-button/__icon/add-button__icon.css);
+@import url(../blocks/edit-button/edit-button.css);
+@import url(../blocks/edit-button/__icon/edit-button__icon.css);
+/*-------------grid-galery--------------------*/
+@import url(../blocks/grid-gallery/grid-gallery.css);
+@import url(../blocks/grid-gallery/__pic/grid-gallery__pic.css);
+@import url(../blocks/grid-gallery/__item/grid-gallery__item.css);
+@import url(../blocks/grid-gallery/__card/grid-gallery__card.css);
+@import url(../blocks/grid-gallery/__caption/grid-gallery__caption.css);
+@import url(../blocks/button-like/button-like.css);
+/*----------------footer--------------------*/
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);

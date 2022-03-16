@@ -1,0 +1,19 @@
+.form__input-container {
+  width: 358px;
+  height: 27px;
+  opacity: 0.2;
+  border: none;
+  border-bottom: 1px solid #000000;
+  margin: 0;
+  padding: 0;
+  font-family: Inter, Georgia, "Times New Roman", Times, serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+@media (max-width: 540px) {
+  .form__input-container {
+    width: 238px;
+  }
+}

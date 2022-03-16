@@ -1,0 +1,12 @@
+.add-button__icon {
+  width: 22px;
+  height: 22px;
+  object-fit: none;
+  object-position: center;
+}
+@media (max-width: 540px) {
+  .add-button__icon {
+    width: 16px;
+    height: 16px;
+  }
+}

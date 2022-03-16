@@ -1,0 +1,12 @@
+.button-like {
+  width: 22px;
+  height: 19px;
+  object-fit: none;
+  object-position: center;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+.button-like:active {
+  background-color: #000000;
+}
