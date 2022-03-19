@@ -1,8 +1,8 @@
 
 /*----------открытие и закрытие попапа----------------*/
-let openPopUp = document.querySelector('.edit-button');
-let closePopUp = document.querySelector('.popup-close');
-let popUp = document.querySelector('.popup');
+const openPopUp = document.querySelector('.edit-button');
+const closePopUp = document.querySelector('.popup-close');
+const popUp = document.querySelector('.popup');
 
 openPopUp.addEventListener('click', () => {
     popUp.classList.add('open');
@@ -26,13 +26,32 @@ document.addEventListener('keydown', (e) => {
 
 /*------ отправка формы---------------- */
 let submitForm = document.querySelector('.form');
-submitForm.addEventListener('submit', () =>{
+submitForm.addEventListener('submit', (evt) =>{
   evt.preventDefault();
   popUp.classList.remove('open');
 })
 
 /*---------заполнение информации пользователя-------------*/
 
-let nameInfo = document.querySelector('.form__input-container_name-info');
-let profInfo = document.querySelector('.form__input-container_prof-info');
+const profInfo = document.querySelector('.form__input-container_prof-info');
+const nameInfo = document.querySelector('.form__input-container_name-info');
+let userName = document.querySelector('.profile__name');
+let userInfo = document.querySelector('.profile__job');
+
+
+const submitButton = document.querySelector('.form__button-submit');
+
+submitButton.addEventListener('click', () =>{
+
+    userName.textContent = nameInfo.value
+    userInfo.textContent = profInfo.value
+
+});
+
+
+
+
+
+
+
 
