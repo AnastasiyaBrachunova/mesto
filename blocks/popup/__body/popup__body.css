@@ -1,12 +1,17 @@
-.form-container {
+.popup__body {
   display: grid;
   grid-template-columns: 1fr 32px;
   grid-template-rows: 32px 1fr;
   gap: 0;
 }
 @media (max-width: 540px) {
-  .form-container {
+  .popup__body {
     grid-template-columns: 1fr;
     grid-template-rows: 22px 1fr;
+    max-width: 282px;
+    justify-items: end;
+    position: absolute;
+    top: 123px;
+    gap: 16px;
   }
 }

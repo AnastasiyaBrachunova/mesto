@@ -14,15 +14,6 @@
     <img class="header__logo" src="./image/logo.svg" alt="Mesto-Russia">
   </header>
   <main class="container">
-    <section class="form-container">
-      <form class="form">
-        <h2 class="form__heading">Редактировать профиль</h2>
-        <fieldset class="form__input-container form__name-info"></fieldset>
-        <fieldset class="form__input-container form__prof-info"></fieldset>
-        <input class="form__button-submit" type="submit" value="Сохранить">
-      </form>
-      <button><img class="close-icon" src="./image/Close Icon.svg" alt="Закрыть"></button>
-    </section>
     <section class="profile">
       <img class="profile__avatar" src="./image/Avatar.png" alt="фото профиля">
       <div class="profile__info">
@@ -82,6 +73,18 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
   </footer>
+  <section class="popup">
+    <div class="popup__body">
+      <button class="popup-close"><img class="popup-close__icon button" src="./image/Close Icon.svg" alt="Закрыть"></button>
+      <form class="form">
+        <h2 class="form__heading">Редактировать профиль</h2>
+        <input class="form__input-container name-info" type="text" placeholder="Ваше имя">
+        <input class="form__input-container prof-info" type="text" placeholder="Род деятельности">
+        <input class="form__button-submit button" type="submit" value="Сохранить">
+      </form>
+    </div>
+  </section>
+  <script src="./pages/index.js"></script> 
 </body>
 
 </html>
