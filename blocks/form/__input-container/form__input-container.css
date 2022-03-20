@@ -17,6 +17,6 @@
     width: 238px;
   }
 }
-.form__input-container:nth-child(2){
+.form__input-container:nth-child(2) {
   margin: 0 0 30px 0;
 }
