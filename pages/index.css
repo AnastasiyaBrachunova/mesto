@@ -1,5 +1,5 @@
-@import url(../vendor/fonts.css);
 @import url(../vendor/normalize.css);
+@import url(../vendor/fonts.css);
 @import url(../blocks/page/page.css);
 @import url(../blocks/button/button.css);
 
@@ -12,7 +12,8 @@
 @import url(../blocks/popup/__body/popup__body.css);
 @import url(../blocks/popup-close/popup-close.css);
 @import url(../blocks/popup-close/__icon/popup-close__icon.css);
-
+@import url(../blocks/form/__input-container/_name-info/form__input-container_name-info.css);
+@import url(../blocks/form/__input-container/_prof-info/form__input-container_prof-info.css);
 /*-----------form--------------------------*/
 
 @import url(../blocks/form/form.css);

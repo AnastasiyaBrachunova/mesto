@@ -6,7 +6,7 @@
   font-size: 42px;
   line-height: 114%;
   color: #ffffff;
-  margin: 0 0 16px 0;
+  margin: 0 0 10px 0;
 }
 @media (max-width: 780px) {
   .profile__name {
@@ -17,7 +17,7 @@
 @media (max-width: 540px) {
   .profile__name {
     max-width: 189px;
-    margin: 0 10px 10px 0;
+    margin: 0 10px 6px 0;
     font-size: 27px;
     line-height: 33px;
   }

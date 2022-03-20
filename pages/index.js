@@ -19,9 +19,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 
-/*popUp.addEventListener('click', () =>{
-    popUp.classList.remove('open');
-})*/
+
 
 
 /*------ отправка формы---------------- */

@@ -7,6 +7,6 @@
 @media (max-width: 540px) {
   .footer {
     width: calc(100% - 19px * 2);
-    margin: 0 auto 36px;
+    margin: 15px auto 0;
   }
 }

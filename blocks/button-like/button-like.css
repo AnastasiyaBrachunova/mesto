@@ -1,6 +1,6 @@
 .button-like {
-  width: 22px;
-  height: 19px;
+  max-width: 22px;
+  max-height: 19px;
   object-fit: none;
   object-position: center;
   margin: 0;
