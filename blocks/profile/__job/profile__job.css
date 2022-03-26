@@ -1,4 +1,7 @@
 .profile__job {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   width: 100%;
   font-family: Inter, Georgia, "Times New Roman", Times, serif;
   font-weight: 400;
@@ -10,8 +13,7 @@
 @media (max-width: 540px) {
   .profile__job {
     width: 100%;
-    padding-left: 62px;
-    text-align: start;
+    text-align: center;
     font-size: 14px;
     line-height: 17px;
   }

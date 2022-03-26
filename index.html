@@ -18,53 +18,52 @@
       <img class="profile__avatar" src="./image/Avatar.png" alt="фото профиля">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <button class="edit-button button"><img class="edit-button__icon" src="./image/edit-icon.svg"
-            alt="Редактировать"></button>
+        <button type="button" class="edit-button button"></button>
         <p class="profile__job">Исследователь океана</p>
       </div>
-      <button class="add-button button"><img class="add-button__icon" src="./image/AddButton.png" alt="Сохранить"></button>
+      <button type="button" class="add-button button"></button>
     </section>
     <ul class="grid-gallery">
-      <li class="grid-gallery__card">
-        <img class="grid-gallery__pic" src="./image/карачаевск.jpg" alt="Крепость">
-        <div class="grid-gallery__item">
-          <p class="grid-gallery__caption">Карачаевск</p>
-          <img class="button-like" src="./image/like.svg" alt="Лайк">
+      <li class="card">
+        <img class="card__pic" src="./image/карачаевск.jpg" alt="Крепость">
+        <div class="card__item">
+          <h2 class="card__caption">Карачаевск</h2>
+          <button class="button-like button" type="button"></button>
         </div>
       </li>
-      <li class="grid-gallery__card">
-        <img class="grid-gallery__pic" src="./image/Эльбрус.png" alt="Эльбрус">
-        <div class="grid-gallery__item">
-          <p class="grid-gallery__caption">Гора Эльбрус</p>
-          <img class="button-like" src="./image/like.svg" alt="Лайк">
+      <li class="card">
+        <img class="card__pic" src="./image/Эльбрус.png" alt="Эльбрус">
+        <div class="card__item">
+          <h2 class="card__caption">Гора Эльбрус</h2>
+          <button class="button-like button" type="button"></button>
         </div>
       </li>
-      <li class="grid-gallery__card">
-        <img class="grid-gallery__pic" src="./image/домбай.png" alt="Скалы Домбая">
-        <div class="grid-gallery__item">
-          <p class="grid-gallery__caption">Домбай</p>
-          <img class="button-like" src="./image/like.svg" alt="Лайк">
+      <li class="card">
+        <img class="card__pic" src="./image/домбай.png" alt="Скалы Домбая">
+        <div class="card__item">
+          <h2 class="card__caption">Домбай</h2>
+          <button class="button-like button" type="button"></button>
         </div>
       </li>
-      <li class="grid-gallery__card">
-        <img class="grid-gallery__pic" src="./image/Эльбрус.png" alt="Эльбрус">
-        <div class="grid-gallery__item">
-          <p class="grid-gallery__caption">Гора Эльбрус</p>
-          <img class="button-like" src="./image/like.svg" alt="Лайк">
+      <li class="card">
+        <img class="card__pic" src="./image/Эльбрус.png" alt="Эльбрус">
+        <div class="card__item">
+          <h2 class="card__caption">Гора Эльбрус</h2>
+          <button class="button-like button" type="button"></button>
         </div>
       </li>
-      <li class="grid-gallery__card">
-        <img class="grid-gallery__pic" src="./image/домбай.png" alt="Скалы Домбая">
-        <div class="grid-gallery__item">
-          <p class="grid-gallery__caption">Домбай</p>
-          <img class="button-like" src="./image/like.svg" alt="Лайк">
+      <li class="card">
+        <img class="card__pic" src="./image/домбай.png" alt="Скалы Домбая">
+        <div class="card__item">
+          <h2 class="card__caption">Домбай</h2>
+          <button class="button-like button" type="button"></button>
         </div>
       </li>
-      <li class="grid-gallery__card">
-        <img class="grid-gallery__pic" src="./image/карачаевск.jpg" alt="Крепость">
-        <div class="grid-gallery__item">
-          <p class="grid-gallery__caption">Карачаево-Черкессия</p>
-          <img class="button-like" src="./image/like.svg" alt="Лайк">
+      <li class="card">
+        <img class="card__pic" src="./image/карачаевск.jpg" alt="Крепость">
+        <div class="card__item">
+          <h2 class="card__caption">Карачаево-Черкессия</h2>
+          <button class="button-like button" type="button"></button>
         </div>
       </li>
     </ul>
@@ -74,16 +73,16 @@
   </footer>
   <section class="popup">
     <div class="popup__body">
-      <button class="popup-close"><img class="popup-close__icon button" src="./image/CloseIcon.svg" alt="Закрыть"></button>
-      <form class="form">
+      <button class="popup-close" type="reset"></button>
+      <form class="form" id="popup" name="popUp">
         <h2 class="form__heading">Редактировать профиль</h2>
-        <input class="form__input-container form__input-container_name-info" type="text" placeholder="Ваше имя">
-        <input class="form__input-container form__input-container_prof-info" type="text" placeholder="Род деятельности">
-        <input class="form__button-submit button" type="submit" value="Сохранить">
+        <input class="form__input-container form__input-container_name-info" name="name-info" type="text" placeholder="Ваше имя">
+        <input class="form__input-container form__input-container_prof-info" name="prof-info" type="text" placeholder="Род деятельности">
+        <button class="form__button-submit button" type="submit" value="Сохранить">Сохранить</button>>
       </form>
     </div>
   </section>
-  <script src="./pages/index.js"></script> 
+  <script src="./scripts/index.js"></script> 
 </body>
 
 

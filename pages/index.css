@@ -11,7 +11,6 @@
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__body/popup__body.css);
 @import url(../blocks/popup-close/popup-close.css);
-@import url(../blocks/popup-close/__icon/popup-close__icon.css);
 @import url(../blocks/form/__input-container/_name-info/form__input-container_name-info.css);
 @import url(../blocks/form/__input-container/_prof-info/form__input-container_prof-info.css);
 /*-----------form--------------------------*/
@@ -30,15 +29,14 @@
 @import url(../blocks/profile/__job/profile__job.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/add-button/add-button.css);
-@import url(../blocks/add-button/__icon/add-button__icon.css);
 @import url(../blocks/edit-button/edit-button.css);
-@import url(../blocks/edit-button/__icon/edit-button__icon.css);
+
 /*-------------grid-galery--------------------*/
 @import url(../blocks/grid-gallery/grid-gallery.css);
-@import url(../blocks/grid-gallery/__pic/grid-gallery__pic.css);
-@import url(../blocks/grid-gallery/__item/grid-gallery__item.css);
-@import url(../blocks/grid-gallery/__card/grid-gallery__card.css);
-@import url(../blocks/grid-gallery/__caption/grid-gallery__caption.css);
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__pic/card__pic.css);
+@import url(../blocks/card/__item/card__item.css);
+@import url(../blocks/card/__caption/card__caption.css);
 @import url(../blocks/button-like/button-like.css);
 /*----------------footer--------------------*/
 @import url(../blocks/footer/footer.css);

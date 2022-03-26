@@ -1,4 +1,7 @@
 .profile__name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   max-width: 294px;
   font-family: Inter, Georgia, "Times New Roman", Times, serif;
   font-style: normal;
@@ -8,6 +11,12 @@
   color: #ffffff;
   margin: 0 0 10px 0;
 }
+@media (max-width: 900px) {
+  .profile__name {
+    font-size: calc(100vw / 23);
+  }
+}
+
 @media (max-width: 780px) {
   .profile__name {
     font-size: calc(100vw / 18.6);

@@ -1,5 +1,6 @@
 .page {
   box-sizing: border-box;
+  padding: 0 30px;
   margin: 0 auto;
   line-height: 1;
   font-size: 18px;

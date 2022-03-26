@@ -1,4 +1,4 @@
-.grid-gallery__caption {
+.card__caption {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
