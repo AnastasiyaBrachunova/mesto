@@ -1,5 +1,5 @@
 .card__item {
-  width: 246px;
+  width: calc(100% - 15px*2);
   max-height: 79px;
   display: flex;
   flex-direction: row;

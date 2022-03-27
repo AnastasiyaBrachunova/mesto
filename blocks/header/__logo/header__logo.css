@@ -4,8 +4,8 @@
 }
 @media (max-width: 540px) {
   .header__logo {
-    max-width: 103px;
-    max-height: 24px;
-    margin: 0 0 0 27px;
+    width: 103.74px;
+    max-height: 24.4px;
+    margin: 28px auto 31px 27px;
   }
 }

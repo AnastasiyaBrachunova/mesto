@@ -9,5 +9,6 @@
 @media (max-width: 540px) {
   .container {
     max-width: 282px;
+    padding: 0 19px;
   }
 }

@@ -1,17 +1,17 @@
 .profile__info {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 24px;
+  grid-template-rows: 39px 18px;
+  gap: 16px 18px;
   align-items: center;
   justify-content: space-between;
   max-width: 336px;
-  margin: 0 245px 0 30px;
+  margin: 0 245px 0 30px; 
 }
 
 @media (max-width: 830px) {
   .profile__info {
     margin: 0 50px 0 30px;
-    max-width: 336px;
   }
 }
 @media (max-width: 600px) {
@@ -25,5 +25,9 @@
     width: 100%;
     margin: 26px auto 33px;
     justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 18px;
+    grid-template-rows: 26px 14px;
+    gap: 14px 10px;
   }
 }

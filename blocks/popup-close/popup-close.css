@@ -12,8 +12,8 @@
 }
 @media (max-width: 540px) {
   .popup-close {
-    max-width: 22px;
-    max-height: 22px;
+    width: 20px;
     grid-column: initial;
+    background-size: contain;
   }
 }

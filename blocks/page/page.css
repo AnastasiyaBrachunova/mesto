@@ -15,3 +15,8 @@
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
 }
+@media (max-width: 540px) {
+  .page {
+   padding: 0;
+  }
+}
