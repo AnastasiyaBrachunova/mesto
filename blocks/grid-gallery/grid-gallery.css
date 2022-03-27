@@ -20,6 +20,6 @@
   .grid-gallery {
     grid-template-columns: repeat(1, 1fr);
     row-gap: 22px;
-    margin: 0 0 36px 0;
+    margin: 0 0 48px 0;
   }
 }

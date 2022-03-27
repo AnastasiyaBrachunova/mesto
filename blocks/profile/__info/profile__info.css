@@ -22,7 +22,7 @@
 }
 @media (max-width: 540px) {
   .profile__info {
-    width: 100%;
+    max-width: 217px;
     margin: 26px auto 33px;
     justify-content: center;
     align-items: center;
