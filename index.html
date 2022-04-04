@@ -23,57 +23,7 @@
       </div>
       <button type="button" class="add-button button"></button>
     </section>
-    <ul class="grid-gallery">
-      <!--
-      <li class="card">
-        <img class="card__pic" src="./image/карачаевск.jpg" alt="Крепость">
-        <button class="card__delete button" type="button"></button>
-        <div class="card__item">
-          <h2 class="card__caption">Карачаевск</h2>
-          <button class="button-like button" type="button"></button>
-        </div>
-      </li>
-      <li class="card">
-        <img class="card__pic" src="./image/Эльбрус.png" alt="Эльбрус">
-        <button class="card__delete button" type="button"></button>
-        <div class="card__item">
-          <h2 class="card__caption">Гора Эльбрус</h2>
-          <button class="button-like_active button-like button " type="button"></button>
-        </div>
-      </li>
-      <li class="card">
-        <img class="card__pic" src="./image/домбай.png" alt="Скалы Домбая">
-        <button class="card__delete button" type="button"></button>
-        <div class="card__item">
-          <h2 class="card__caption">Домбай</h2>
-          <button class="button-like button" type="button"></button>
-        </div>
-      </li>
-      <li class="card">
-        <img class="card__pic" src="./image/Эльбрус.png" alt="Эльбрус">
-        <button class="card__delete button" type="button"></button>
-        <div class="card__item">
-          <h2 class="card__caption">Гора Эльбрус</h2>
-          <button class="button-like button" type="button"></button>
-        </div>
-      </li>
-      <li class="card">
-        <img class="card__pic" src="./image/домбай.png" alt="Скалы Домбая">
-        <button class="card__delete button" type="button"></button>
-        <div class="card__item">
-          <h2 class="card__caption">Домбай</h2>
-          <button class="button-like button" type="button"></button>
-        </div>
-      </li>
-      <li class="card">
-        <img class="card__pic" src="./image/карачаевск.jpg" alt="Крепость">
-        <button class="card__delete button" type="button"></button>
-        <div class="card__item">
-          <h2 class="card__caption">Карачаево-Черкессия</h2>
-          <button class="button-like button" type="button"></button>
-        </div>
-      </li>-->
-    </ul>
+    <ul class="grid-gallery"></ul>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
@@ -84,27 +34,14 @@
 <!--Темплэйт для карточки-->
   <template id="card-template">
     <li class="card">
-      <img class="card__pic">
+      <img class="card__pic card_smallPic button" src="#" alt="">
       <button class="card__delete button" type="button"></button>
       <div class="card__item">
-        <h2 class="card__caption"></h2>
+        <h2 class="card__caption card_description"></h2>
         <button class="button-like button" type="button"></button>
       </div>
     </li>
   </template>
-
-
-
-
-
-
-
-
-
-
-
-
-
   <!--Модальное окно userInfo-->
   <section class="popup">
     <div class="popup__body">
@@ -124,19 +61,25 @@
   <section class="popup" id="trawelInfo">
     <div class="popup__body">
       <button class="popup-close" id="closeTravel" type="button"></button>
-      <form class="form" name="popUp">
+      <form class="form" id="popUpTravel">
         <h2 class="form__heading">Новое место</h2>
-        <input class="form__input-container" id="nameCard" name="name-card" type="text" placeholder="Название">
+        <input class="form__input-container" id="cardInfo" name="name-card" type="text" placeholder="Название">
         <input class="form__input-container" id="urlInfo" name="url-info" type="text" placeholder="Ссылка на картинку">
         <button class="form__button-submit button" id="creatCard" type="submit" value="Создать">Создать</button>
       </form>
     </div>
-
-    <div class="play-pic">
-
-    </div>
-
   </section>
+
+  <div class="popup popup_dark-background" id="zoomPic">
+    <div class="popup__pic">
+      <div class = "popup__body">
+        <button class="popup-close popup-close_pic" id="closePic" type="button"></button>
+        <img class="popup__zoom-pic" src="#" alt="">
+      </div>
+      <p class="popup__capture"></p>
+    </div>
+          
+  </div>
   <script src="./scripts/index.js"></script>
 </body>
 

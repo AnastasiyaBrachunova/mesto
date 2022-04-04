@@ -2,16 +2,16 @@
   display: grid;
   grid-template-columns: 1fr 32px;
   grid-template-rows: 32px 1fr;
-  gap: 0;
+  gap: 8px;
 }
 @media (max-width: 540px) {
   .popup__body {
     grid-template-columns: 1fr;
-    grid-template-rows: 22px 1fr;
-    max-width: 282px;
+    grid-template-rows: 20px 1fr;
+    width: 100%;
     justify-items: end;
-    position: absolute;
     top: 123px;
     gap: 16px;
   }
 }
+
