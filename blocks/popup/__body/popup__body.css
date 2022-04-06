@@ -8,9 +8,7 @@
   .popup__body {
     grid-template-columns: 1fr;
     grid-template-rows: 20px 1fr;
-    width: 100%;
-    justify-items: end;
-    top: 123px;
+    justify-items: center;
     gap: 16px;
   }
 }

@@ -1,8 +1,9 @@
 .card {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 282px;
+  grid-template-rows: 282px 1fr;
   flex-direction: column;
-  width: 100%;
   align-items: center;
   justify-content: space-between;
   background-color: #ffffff;
