@@ -1,19 +1,18 @@
 /*----------Переменные открытие и закрытие попапов----------------*/
-const popUpOpen = document.querySelector(".edit-button");
-const popUpClose = document.querySelector(".popup-close");
-const popUpUserInfo = document.querySelector(".popup");
+const userInfoOpen = document.querySelector(".edit-button");
+const userInfoClose = document.getElementById("closeUserInfo");
+const popUpUserInfo = document.getElementById("profilePopup");
 const profInfo = document.querySelector(".form__input-container_prof-info");
 const nameInfo = document.querySelector(".form__input-container_name-info");
 const userName = document.querySelector(".profile__name");
 const userInfo = document.querySelector(".profile__job");
 const trawelInfoOpen = document.getElementById("trawelInfo");
 const cardButtonAdd = document.querySelector(".add-button");
-const trawelCardclose = document.getElementById("closeTravel");
+const trawelCardclose = document.getElementById("closeTravel"); 
 
 /*---------------Переменные для создание новых карточек-----------------------*/
 const template = document.getElementById("card-template");
 const newNameCard = document.querySelector(".card__caption");
-const newUrlInfo = document.querySelector(".card__pic");
 const cardContainer = document.querySelector(".grid-gallery");
 const formTravel = document.getElementById("popUpTravel");
 const namePicAdd = document.getElementById("cardInfo");
@@ -24,45 +23,36 @@ const captureZoom = document.querySelector(".popup__capture");
 const closePic = document.querySelector(".popup-close_pic");
 
 
-function openModal(selector) {
- selector.classList.add("popup_opened");
+function openModal(popupId) {
+ popupId.classList.add("popup_opened");
 }
-function closeModal(selector) {
-  selector.classList.remove("popup_opened");
+function closeModal(popupId) {
+ popupId.classList.remove("popup_opened");
 }
 
-function propfilePopupOpen(){
-  openModal(popUpUserInfo);
+function propfilePopUpOpen(){
   nameInfo.value = userName.textContent;
   profInfo.value = userInfo.textContent;
+  openModal(popUpUserInfo);
 }
 
-popUpOpen.addEventListener("click", () => propfilePopupOpen());
+userInfoOpen.addEventListener("click", () => propfilePopUpOpen());
 
-popUpClose.addEventListener("click", () => closeModal(popUpUserInfo));
+userInfoClose.addEventListener("click", () => closeModal(popUpUserInfo));
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    closeModal(popUpUserInfo);
-  }
-});
-
-/*------ отправка формы---------------- */
-const formSubmit = document.querySelector(".form");
-
-formSubmit.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  closeModal(popUpUserInfo);
-});
-
-/*---------заполнение информации пользователя-------------*/
+/*------ заполнение информации пользователя и отправка формы---------------- */
+const formUserInfoSubmit = document.getElementById("formUserInfo");
 
 function saveInfoModal() {
   userName.textContent = nameInfo.value;
   userInfo.textContent = profInfo.value;
 }
 
-formSubmit.addEventListener("click", () => saveInfoModal());
+formUserInfoSubmit.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  saveInfoModal();
+  closeModal(popUpUserInfo);
+});
 
 /*-------вкл/выкл попап добавления картинок----------*/
 
@@ -97,20 +87,15 @@ const photoArray = [
   },
 ];
 
-function openModalPic(card) {
-  picOpen.classList.add("popup_opened");
+function openModalPic(card) { // открыть картинку
   captureZoom.textContent = card.name;
   picZoom.src = card.src;
   picZoom.alt = card.src;
+  openModal(picOpen);
+} 
+closePic.addEventListener("click", () => closeModal(picOpen)); //закрыть картинку
 
-} // открыть картинку
-
-function closeModalPic() {
-  picOpen.classList.remove("popup_opened");
-} // закрыть картинку
-
-
-const creatBlock = (card) => {
+const creatBlock = (card) => { // создание картинок
   const task = template.content.querySelector(".card").cloneNode(true);
   const cardPic = task.querySelector('.card__pic');
   task.querySelector(".card__caption").textContent = card.name;
@@ -127,7 +112,6 @@ const creatBlock = (card) => {
 
   //вкл/выкл большое изображение
   cardPic.addEventListener("click", () => openModalPic(card));
-  closePic.addEventListener("click", () => closeModal(picOpen));
 
   return task;
 };
