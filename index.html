@@ -46,12 +46,27 @@
   <section class="popup" id = "profilePopup">
     <div class="popup__body">
       <button class="popup-close" id="closeUserInfo" type="button"></button>
-      <form class="form" id="formUserInfo" name="popUp">
+      <form class="form" id="formUserInfo" name="user" novalidate>
         <h2 class="form__heading">Редактировать профиль</h2>
-        <input class="form__input-container form__input-container_name-info" name="name-info" type="text"
-          placeholder="Ваше имя">
-        <input class="form__input-container form__input-container_prof-info" name="prof-info" type="text"
-          placeholder="Род деятельности">
+        <input 
+        class="form__input-container form__input-container_name-info" 
+        id="name" type="text"
+        placeholder="Ваше имя" 
+        minlength="2" 
+        maxlength="40" 
+        required
+        />
+        <span id="name-error" class ="error"></span>>
+        <input 
+        class="form__input-container form__input-container_prof-info" 
+        id="prof-info" 
+        type="text"
+        placeholder="Род деятельности" 
+        minlength="2" 
+        maxlength="200" 
+        required
+        />
+        <span id="prof-info-error" class ="error"></span>>
         <button class="form__button-submit button" type="submit" value="Сохранить">Сохранить</button>
       </form>
     </div>
@@ -61,10 +76,26 @@
   <section class="popup" id="trawelInfo">
     <div class="popup__body">
       <button class="popup-close" id="closeTravel" type="button"></button>
-      <form class="form" id="popUpTravel">
+      <form class="form" id="popUpTravel" name="travel" novalidate>
         <h2 class="form__heading">Новое место</h2>
-        <input class="form__input-container" id="cardInfo" name="name-card" type="text" placeholder="Название">
-        <input class="form__input-container" id="urlInfo" name="url-info" type="text" placeholder="Ссылка на картинку">
+        <input 
+        class="form__input-container" 
+        id="cardInfo" 
+        type="text" 
+        placeholder="Название" 
+        minlength="2" 
+        maxlength="30" 
+        required
+        />
+        <span id="cardInfo-error" class ="error"></span>>
+        <input 
+        class="form__input-container" 
+        id="urlInfo" 
+        type="url" 
+        placeholder="Ссылка на картинку" 
+        required
+        />
+        <span id="urlInfo-error" class ="error"></span>>
         <button class="form__button-submit button" id="creatCard" type="submit" value="Создать">Создать</button>
       </form>
     </div>
@@ -85,3 +116,5 @@
 
 
 </html>
+
+

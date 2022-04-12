@@ -16,6 +16,8 @@
     width: 238px;
   }
 }
-.form__input-container:nth-child(2) {
-  margin: 0 0 30px 0;
+
+.form__input-container:focus {
+  background-color: transparent;
+  outline: none;
 }
