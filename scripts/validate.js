@@ -44,23 +44,10 @@ function enableValidation (config){
   const formList = Array.from(document.querySelectorAll(config.form));
 formList.forEach((formElement) => {
   formElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
   });
-
     setEventListeners(formElement, config);
 });
 }
-
-enableValidation({
-    form: '.form',
-    formInput: '.form__input-container',
-    buttonElement: '.form__button-submit',
-    inactiveButtonClass: 'form__button-submit_invalid',
-    inputErrorClass: 'form__input-container_error"',
-    errorClass: 'form__input-error_active',
-    closeButton: '.popup-close',
-  });
-
 
 function toggleButtonState (inputList, buttonElement, config) {
   if (hasInvalidInput(inputList)) {
@@ -71,6 +58,15 @@ function toggleButtonState (inputList, buttonElement, config) {
     buttonElement.disabled = false;
   } 
 }
+
+// function disableButton() {
+//   travelSubmit.disabled = true;
+//   travelSubmit.classList.add(form__button-submit_invalid);
+// }
+
+
+
+
 
 function hasInvalidInput(inputList){
   return inputList.some((inputElement) => {
@@ -90,3 +86,28 @@ function hasInvalidInput(inputList){
     inputElement.value = "";
   });
 }
+
+const formForValidation = {
+  form: '.form',
+  formInput: '.form__input-container',
+  buttonElement: '.form__button-submit',
+  inactiveButtonClass: 'form__button-submit_invalid',
+  inputErrorClass: 'form__input-container_error"',
+  errorClass: 'form__input-error_active',
+  closeButton: '.popup-close',
+}
+
+// function resetForm(config){
+//   const errorInputList = Array.from(document.querySelectorAll(config.formInput));
+//   const errorlist = Array.from(document.querySelectorAll(config.errorClass));
+//   errorlist.forEach((errorElement) => {
+//     errorElement.classList.remove(config.errorClass);
+//     errorElement.textContent = "";
+//   });
+//   errorInputList.forEach((inputElement) => {
+//     inputElement.classList.remove(config.inputErrorClass);
+//   });
+// }
+
+
+enableValidation(formForValidation);

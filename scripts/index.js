@@ -36,22 +36,11 @@ function escClose(evt){
  function openModal(popupId) {
   popupId.classList.add("popup_opened");
   document.addEventListener("keydown",  escClose);
-  enableValidation({
-    form: '.form',
-    formInput: '.form__input-container',
-    buttonElement: '.form__button-submit',
-    inactiveButtonClass: 'form__button-submit_invalid',
-    inputErrorClass: 'form__input-container_error"',
-    errorClass: 'form__input-error_active'
-  });
  }
 
  function closeModal(popupId) {
    popupId.classList.remove("popup_opened");
   document.removeEventListener("keydown",  escClose);
-  modalClose.addEventListener("click", formTravel.reset());
-  resetForm();
-  
 }
 
 function overlayClose(evt){
@@ -71,11 +60,13 @@ function openPropfilePopUp(){
   openModal(popUpUserInfo);
 }
 
-userInfoOpen.addEventListener("click", () => openPropfilePopUp());
+userInfoOpen.addEventListener("click", () => {
+  resetForm();
+  openPropfilePopUp();
+});
 
 userInfoClose.addEventListener("click", () => {
   closeModal(popUpUserInfo);
-  formUserInfo.reset();
 });
 
 /*------ заполнение информации пользователя и отправка формы---------------- */
@@ -94,7 +85,10 @@ formUserInfoSubmit.addEventListener("submit", (evt) => {
 
 /*-------вкл/выкл попап добавления картинок----------*/
 
-cardButtonAdd.addEventListener("click", () => openModal(trawelInfoOpen));
+cardButtonAdd.addEventListener("click", () => {
+  openModal(trawelInfoOpen);
+  resetForm();
+});
 trawelCardclose.addEventListener("click", () => closeModal(trawelInfoOpen));
 
 function openModalPic(card) { // открыть картинку
@@ -142,9 +136,10 @@ const addCard = (event) => {
   const card = { name: namePicAdd.value, src: urlAdd.value }; 
   renderCard(card); 
   closeModal(trawelInfo); 
-  namePicAdd.value = ""; 
-  urlAdd.value = "";
-};
+  modalClose.addEventListener("click", formTravel.reset());
+  enableValidation(formForValidation);
+ };
+
 cardContainer.append(...elements);
 formTravel.addEventListener("submit", addCard);
 
