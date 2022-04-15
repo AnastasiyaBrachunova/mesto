@@ -45,28 +45,30 @@
   <!--Модальное окно userInfo-->
   <section class="popup" id = "profilePopup">
     <div class="popup__body">
-      <button class="popup-close" id="closeUserInfo" type="button"></button>
+      <button class="popup-close button" id="closeUserInfo" type="button"></button>
       <form class="form" id="formUserInfo" name="user" novalidate>
         <h2 class="form__heading">Редактировать профиль</h2>
         <input 
         class="form__input-container form__input-container_name-info" 
         id="name" type="text"
-        placeholder="Ваше имя" 
+        placeholder="Ваше имя"
+        autocomplete="off"  
         minlength="2" 
         maxlength="40" 
         required
         />
-        <span id="name-error" class ="error"></span>>
+        <span id="name-error" class ="form__input-error name-error"></span>
         <input 
         class="form__input-container form__input-container_prof-info" 
         id="prof-info" 
         type="text"
-        placeholder="Род деятельности" 
+        placeholder="Род деятельности"
+        autocomplete="off"  
         minlength="2" 
         maxlength="200" 
         required
         />
-        <span id="prof-info-error" class ="error"></span>>
+        <span id="prof-info-error" class ="form__input-error prof-info-error"></span>
         <button class="form__button-submit button" type="submit" value="Сохранить">Сохранить</button>
       </form>
     </div>
@@ -75,27 +77,29 @@
   <!--Модальное окно trawelInfo-->
   <section class="popup" id="trawelInfo">
     <div class="popup__body">
-      <button class="popup-close" id="closeTravel" type="button"></button>
+      <button class="popup-close button" id="closeTravel" type="button"></button>
       <form class="form" id="popUpTravel" name="travel" novalidate>
         <h2 class="form__heading">Новое место</h2>
         <input 
-        class="form__input-container" 
+        class="form__input-container form__input-container_cardInfo" 
         id="cardInfo" 
-        type="text" 
+        type="text"
+        autocomplete="off"  
         placeholder="Название" 
         minlength="2" 
         maxlength="30" 
         required
         />
-        <span id="cardInfo-error" class ="error"></span>>
+        <span id="cardInfo-error" class ="form__input-error cardInfo-error"></span>
         <input 
-        class="form__input-container" 
+        class="form__input-container form__input-container_urlInfo" 
         id="urlInfo" 
-        type="url" 
+        type="url"
+        autocomplete="off" 
         placeholder="Ссылка на картинку" 
         required
         />
-        <span id="urlInfo-error" class ="error"></span>>
+        <span id="urlInfo-error" class ="form__input-error urlInfo-error"></span>
         <button class="form__button-submit button" id="creatCard" type="submit" value="Создать">Создать</button>
       </form>
     </div>
@@ -105,13 +109,16 @@
   <div class="popup popup_dark-background" id="zoomPic">
     <div class="popup__pic">
       <div class = "popup__body">
-        <button class="popup-close popup-close_pic" id="closePic" type="button"></button>
+        <button class="popup-close popup-close_pic button" id="closePic" type="button"></button>
         <img class="popup__zoom-pic" src="#" alt="">
       </div>
       <p class="popup__capture"></p>
     </div>
  </div>
-  <script src="./scripts/index.js"></script>
+ <script src="./scripts/cards.js"></script>
+ <script src="./scripts/index.js"></script>
+ <script src="./scripts/validate.js"></script>
+
 </body>
 
 

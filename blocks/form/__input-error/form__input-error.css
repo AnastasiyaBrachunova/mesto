@@ -1,4 +1,4 @@
-.error {
+.form__input-error {
   width: 358px;
   margin-top: 5px;
   margin-left: 0;
@@ -8,4 +8,6 @@
   font-size: 12px;
   line-height: 15px;
   color: #ff0000;
+  opacity: 0;
+  transition: 0.3s;
 }
