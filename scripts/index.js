@@ -22,6 +22,7 @@ const captureZoom = document.querySelector(".popup__capture");
 const closePic = document.querySelector(".popup-close_pic");
 const popUpOpened = document.querySelector(".popup_opened");
 const travelSubmit = document.querySelector(".form__button-submit");
+const modalClose = document.querySelector('.popup-close');
 
 /*----универсальное открытие и закрытие модальных окон-------*/
 
@@ -48,6 +49,9 @@ function escClose(evt){
  function closeModal(popupId) {
    popupId.classList.remove("popup_opened");
   document.removeEventListener("keydown",  escClose);
+  modalClose.addEventListener("click", formTravel.reset());
+  resetForm();
+  
 }
 
 function overlayClose(evt){
@@ -136,9 +140,10 @@ const elements = photoArray.map((card) => {
 const addCard = (event) => {
   event.preventDefault(); 
   const card = { name: namePicAdd.value, src: urlAdd.value }; 
-  cardRender(card); 
+  renderCard(card); 
   closeModal(trawelInfo); 
-  trawelInfo.reset();
+  namePicAdd.value = ""; 
+  urlAdd.value = "";
 };
 cardContainer.append(...elements);
 formTravel.addEventListener("submit", addCard);
