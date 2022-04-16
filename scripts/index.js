@@ -23,6 +23,8 @@ const closePic = document.querySelector(".popup-close_pic");
 const popUpOpened = document.querySelector(".popup_opened");
 const travelSubmit = document.querySelector(".form__button-submit");
 const modalClose = document.querySelector('.popup-close');
+const cardFormSubmitButton = document.querySelector('.form__button-submit_travel');
+
 
 /*----универсальное открытие и закрытие модальных окон-------*/
 
@@ -135,9 +137,10 @@ const addCard = (event) => {
   event.preventDefault(); 
   const card = { name: namePicAdd.value, src: urlAdd.value }; 
   renderCard(card); 
-  closeModal(trawelInfo); 
+  closeModal(trawelInfo);
+  console.log(travelSubmit)
+  disableSubmitButton(cardFormSubmitButton, formForValidation);
   modalClose.addEventListener("click", formTravel.reset());
-  enableValidation(formForValidation);
  };
 
 cardContainer.append(...elements);

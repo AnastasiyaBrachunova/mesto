@@ -1,3 +1,14 @@
+const formForValidation = {
+  form: '.form',
+  formInput: '.form__input-container',
+  buttonElement: '.form__button-submit',
+  inactiveButtonClass: 'form__button-submit_invalid',
+  inputErrorClass: 'form__input-container_error"',
+  errorClass: 'form__input-error_active',
+  closeButton: '.popup-close',
+}
+
+
 const showInputError = (formElement, inputElement, errorMessage, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(config.inputErrorClass);
@@ -25,6 +36,12 @@ const checkInputValidity = (formElement, inputElement, config) => {
     hideInputError(formElement, inputElement, config);
   }
 };
+
+function hasInvalidInput(inputList){
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  }); 
+}
 
 const setEventListeners = (formElement, config) => {
   const inputList = Array.from(formElement.querySelectorAll(config.formInput));
@@ -59,19 +76,9 @@ function toggleButtonState (inputList, buttonElement, config) {
   } 
 }
 
-// function disableButton() {
-//   travelSubmit.disabled = true;
-//   travelSubmit.classList.add(form__button-submit_invalid);
-// }
-
-
-
-
-
-function hasInvalidInput(inputList){
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  }); 
+const disableSubmitButton = (buttonElement, config) => {
+  buttonElement.classList.add(config.inactiveButtonClass);
+  buttonElement.disabled = true;
 }
 
  function resetForm(){
@@ -86,28 +93,5 @@ function hasInvalidInput(inputList){
     inputElement.value = "";
   });
 }
-
-const formForValidation = {
-  form: '.form',
-  formInput: '.form__input-container',
-  buttonElement: '.form__button-submit',
-  inactiveButtonClass: 'form__button-submit_invalid',
-  inputErrorClass: 'form__input-container_error"',
-  errorClass: 'form__input-error_active',
-  closeButton: '.popup-close',
-}
-
-// function resetForm(config){
-//   const errorInputList = Array.from(document.querySelectorAll(config.formInput));
-//   const errorlist = Array.from(document.querySelectorAll(config.errorClass));
-//   errorlist.forEach((errorElement) => {
-//     errorElement.classList.remove(config.errorClass);
-//     errorElement.textContent = "";
-//   });
-//   errorInputList.forEach((inputElement) => {
-//     inputElement.classList.remove(config.inputErrorClass);
-//   });
-// }
-
 
 enableValidation(formForValidation);
