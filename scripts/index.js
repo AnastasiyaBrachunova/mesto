@@ -95,7 +95,7 @@ trawelCardclose.addEventListener("click", () => closeModal(trawelInfoOpen));
 
 function openModalPic(card) { // открыть картинку
   captureZoom.textContent = card.name;
-  picZoom.src = card.src;
+  picZoom.src = card.link;
   picZoom.alt = card.name;
   openModal(picOpen);
 
@@ -106,7 +106,7 @@ const creatBlock = (card) => { // создание картинок
   const task = template.content.querySelector(".card").cloneNode(true);
   const cardPic = task.querySelector('.card__pic');
   task.querySelector(".card__caption").textContent = card.name;
-  cardPic.src = card.src;
+  cardPic.src = card.link;
   cardPic.alt = card.name;
 
   task.querySelector(".card__delete").addEventListener("click", () => {
@@ -135,15 +135,18 @@ const elements = photoArray.map((card) => {
 
 const addCard = (event) => {
   event.preventDefault(); 
-  const card = { name: namePicAdd.value, src: urlAdd.value }; 
+  const card = { name: namePicAdd.value, link: urlAdd.value }; 
   renderCard(card); 
   closeModal(trawelInfo);
-  console.log(travelSubmit)
   disableSubmitButton(cardFormSubmitButton, formForValidation);
   modalClose.addEventListener("click", formTravel.reset());
  };
 
 cardContainer.append(...elements);
 formTravel.addEventListener("submit", addCard);
+
+
+
+
 
  

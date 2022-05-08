@@ -23,7 +23,7 @@
       </div>
       <button type="button" class="add-button button"></button>
     </section>
-    <ul class="grid-gallery"></ul>
+    <ul class="grid-gallery" id="grid-gallery"></ul>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
@@ -32,12 +32,12 @@
 
 
 <!--Темплэйт для карточки-->
-  <template id="card-template">
-    <li class="card">
-      <img class="card__pic card_smallPic button" src="#" alt="">
-      <button class="card__delete button" type="button"></button>
+  <template class="card-template" id="card-template">
+    <li class="card" id="card">
+      <img class="card__pic card_smallPic button" src="#" alt="" id = "card__pic">
+      <button class="card__delete button" id = "card__delete" type="button"></button>
       <div class="card__item">
-        <h2 class="card__caption card_description"></h2>
+        <h2 class="card__caption card_description" id="card__caption"></h2>
         <button class="button-like button" type="button"></button>
       </div>
     </li>
@@ -116,6 +116,7 @@
     </div>
  </div>
  <script src="./scripts/cards.js"></script>
+ <script src="./scripts/Card.js"></script>
  <script src="./scripts/index.js"></script>
  <script src="./scripts/validate.js"></script>
 
