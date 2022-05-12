@@ -137,8 +137,8 @@ closePic.addEventListener("click", () => closeModal(picOpen)); //закрыть 
 
 const addCard = (event) => {
   event.preventDefault(); 
-  const card = new Card( ".card-template");
-  const cardElement = card.renderCArd();
+  const card = new Card( {name: namePicAdd.value, link: urlAdd.value}, ".card-template");
+  const cardElement = card.generateCard();
   cardContainer.prepend(cardElement); 
 
   closeModal(trawelInfoOpen) 
