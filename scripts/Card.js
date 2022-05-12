@@ -1,44 +1,33 @@
+import { openModal } from "./index.js";
+
 export default class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
-  }
-
-  _getTemplate() {
-    const cardElement = document
+    this._card = document
       .querySelector(this._cardSelector)
       .content.querySelector(".card")
       .cloneNode(true);
-
-    return cardElement;
+    this._buttonLikeSelector = this._card.querySelector(".button-like");
   }
 
   generateCard() {
-    this._card = this._getTemplate();
     this._setEventListeners();
-
     this._card.querySelector(".card__caption").textContent = this._name;
     this._card.querySelector(".card__pic").src = this._link;
+    this._card.querySelector(".card__pic").alt = this._name;
 
     return this._card;
   }
 
   _cardLike() {
-    this._card
-      .querySelector(".button-like")
-      .classList.toggle("button-like_active");
+    this._buttonLikeSelector.classList.toggle("button-like_active");
   }
 
   _cardDelete() {
     this._card.remove();
-  }
-
-  _openModal(popupId) {
-    popupId.classList.add("popup_opened");
-  }
-  _closeModal(popupId) {
-    popupId.classList.remove("popup_opened");
+    this._card = null;
   }
 
   _openModalPic() {
@@ -48,11 +37,11 @@ export default class Card {
     captureZoom.textContent = this._name;
     picZoom.src = this._link;
     picZoom.alt = this._name;
-    this._openModal(picOpen);
+    openModal(picOpen);
   }
 
   _setEventListeners() {
-    this._card.querySelector(".button-like").addEventListener("click", () => {
+    this._buttonLikeSelector.addEventListener("click", () => {
       this._cardLike();
     });
 
@@ -63,14 +52,5 @@ export default class Card {
     this._card.querySelector(".card__pic").addEventListener("click", () => {
       this._openModalPic();
     });
-  }
-
-  creatBlock() {
-    this._getTemplate();
-    this._card.querySelector(".card__pic").src = data.link;
-    this._card.querySelector(".card__caption").textContent = data.name;
-    cardPic.src = data.link;
-    this._card.querySelector(".card__pic").alt = data.name;
-    this._setEventListeners();
   }
 }

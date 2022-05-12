@@ -1,16 +1,12 @@
 export class FormValidator {
   constructor(config, formElement) {
-    this._formSelector = document.querySelector(config.form);
     this._formInput = config.formInput;
     this._formElement = formElement;
     this._buttonElement = this._formElement.querySelector(config.buttonElement);
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
-    this._closeButton = config.closeButton;
-    this._inputList = Array.from(
-      this._formElement.querySelectorAll(this._inputSelector)
-    );
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._formInput));
   }
 
   _showInputError = (inputElement, errorMessage) => {
@@ -32,11 +28,9 @@ export class FormValidator {
   };
 
   _checkInputValidity = (inputElement) => {
-    if (!inputElement.validity.valid) {
+    if (!inputElement.validity.valid || inputElement.value === "") {
       this._showInputError(inputElement, inputElement.validationMessage);
-    } else if (inputElement.value === "") {
-      this._showInputError(inputElement, inputElement.validationMessage);
-    } else {
+    }  else {
       this._hideInputError(inputElement);
     }
   };
@@ -66,16 +60,11 @@ export class FormValidator {
   }
 
   _setEventListeners = () => {
-    const inputList = Array.from(
-      this._formElement.querySelectorAll(this._formInput)
-    );
-    this._inputList = inputList;
-
     this._toggleButtonState();
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(inputElement);
+        this._toggleButtonState();
       });
     });
   };
@@ -101,10 +90,8 @@ export class FormValidator {
   }
 
   enableValidation() {
-    const formList = Array.from(this._formElement);
-    formList.forEach((formElement) => {
-      formElement.addEventListener("submit", (evt) => {});
-      this._setEventListeners(formElement);
-    });
+      this._formElement.addEventListener("submit", (evt) => {});
+      this._setEventListeners(this._formElement);
+    
   }
 }

@@ -48,6 +48,11 @@ const photoArray = [
   },
 ];
 
+const card = new Card(
+  { name: namePicAdd.value, link: urlAdd.value },
+  ".card-template"
+);
+
 /*----универсальное открытие и закрытие модальных окон-------*/
 
 function escClose(evt) {
@@ -57,7 +62,7 @@ function escClose(evt) {
   }
 }
 
-function openModal(popupId) {
+export function openModal(popupId) {
   popupId.classList.add("popup_opened");
   document.addEventListener("keydown", escClose);
 }
@@ -110,22 +115,30 @@ formUserInfoSubmit.addEventListener("submit", (evt) => {
 /*-------вкл/выкл попап добавления картинок----------*/
 
 cardButtonAdd.addEventListener("click", () => {
-  openModal(trawelInfoOpen);
   formTravel.reset();
   formTravelValidation.resetForm();
+  formTravelValidation.disableSubmitButton();
+  openModal(trawelInfoOpen);
 });
+
 trawelCardclose.addEventListener("click", () => closeModal(trawelInfoOpen));
 
 closePic.addEventListener("click", () => closeModal(picOpen)); //закрыть картинку
 
 /*---------Добавление карточек через кнопку Создать------*/
 
+// const newCard = (data, selector) => {
+//   const card = new Card(data, selector);
+//   return card;
+//  }
+
+
 const addCard = (event) => {
   event.preventDefault();
-  const card = new Card(
-    { name: namePicAdd.value, link: urlAdd.value },
-    ".card-template"
-  );
+  // const card = new Card(
+  //   { name: namePicAdd.value, link: urlAdd.value },
+  //   ".card-template"
+  // );
   const cardElement = card.generateCard();
   cardContainer.prepend(cardElement);
 
@@ -137,15 +150,14 @@ formTravel.addEventListener("submit", addCard);
 //Создание карточек
 
 photoArray.forEach((item) => {
-  const card = new Card(item, ".card-template");
-  const cardElement = card.generateCard();
+  const cardTemplait = new Card(item, ".card-template");
+  const cardElement = cardTemplait.generateCard();
   cardContainer.append(cardElement);
   return cardElement;
 });
 
 // ВКЛЮЧЕНИЕ ВАЛИДАЦИИ
 const formForValidation = {
-  form: ".form",
   formInput: ".form__input-container",
   buttonElement: ".form__button-submit",
   inactiveButtonClass: "form__button-submit_invalid",
