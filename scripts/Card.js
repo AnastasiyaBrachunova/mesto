@@ -1,4 +1,4 @@
-export default  class Card {
+export default class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
     this._link = data.link;
@@ -25,7 +25,9 @@ export default  class Card {
   }
 
   _cardLike() {
-    this._card.querySelector(".button-like").classList.toggle("button-like_active");
+    this._card
+      .querySelector(".button-like")
+      .classList.toggle("button-like_active");
   }
 
   _cardDelete() {
@@ -34,11 +36,10 @@ export default  class Card {
 
   _openModal(popupId) {
     popupId.classList.add("popup_opened");
-   }
-   _closeModal(popupId) {
+  }
+  _closeModal(popupId) {
     popupId.classList.remove("popup_opened");
- }
-
+  }
 
   _openModalPic() {
     const captureZoom = document.querySelector(".popup__capture");
@@ -64,21 +65,12 @@ export default  class Card {
     });
   }
 
-  creatBlock () { // создание картинок
+  creatBlock() {
     this._getTemplate();
-    this._card.querySelector('.card__pic').src = data.link;
+    this._card.querySelector(".card__pic").src = data.link;
     this._card.querySelector(".card__caption").textContent = data.name;
     cardPic.src = data.link;
-    this._card.querySelector('.card__pic').alt = data.name;
+    this._card.querySelector(".card__pic").alt = data.name;
     this._setEventListeners();
-  };
-
-  // renderCard () {
-  //   document.querySelector('.grid-gallery').prepend(this.creatBlock());
-  // };
-
-
-
+  }
 }
-
-
