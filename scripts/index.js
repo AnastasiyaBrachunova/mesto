@@ -66,7 +66,7 @@ function openPropfilePopUp(){
 }
 
 userInfoOpen.addEventListener("click", () => {
-  // resetForm();
+  formUserInfoValidation.resetForm();
   openPropfilePopUp();
 });
 
@@ -92,7 +92,7 @@ formUserInfoSubmit.addEventListener("submit", (evt) => {
 
 cardButtonAdd.addEventListener("click", () => {
   openModal(trawelInfoOpen);
-  // resetForm();
+  formTravelValidation.resetForm();
 });
 trawelCardclose.addEventListener("click", () => closeModal(trawelInfoOpen));
 
