@@ -1,7 +1,5 @@
 .form__input-error {
   width: 358px;
-  margin-top: 5px;
-  margin-left: 0;
   font-family: Inter, Georgia, "Times New Roman", Times, serif;
   font-style: normal;
   font-weight: 400;
@@ -10,4 +8,11 @@
   color: #ff0000;
   opacity: 0;
   transition: 0.3s;
+}
+
+
+@media (max-width: 540px) {
+  .form__input-error {
+    width: 238px;
+  }
 }
