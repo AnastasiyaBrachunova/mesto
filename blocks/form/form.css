@@ -1,6 +1,8 @@
 .form {
+  box-sizing: border-box;
   grid-row: 2;
   width: 430px;
+  /* height: 359px; */
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,15 +1,13 @@
 import { openModal } from "./index.js";
 
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data) {
     this._name = data.name;
     this._link = data.link;
-    this._cardSelector = cardSelector;
-    this._card = document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".card")
+    this._cardSelector = document.querySelector(".card-template");
+    this._card = this._cardSelector.content
+      .querySelector(".card")
       .cloneNode(true);
-    this._buttonLikeSelector = this._card.querySelector(".button-like");
   }
 
   generateCard() {
@@ -22,7 +20,7 @@ export default class Card {
   }
 
   _cardLike() {
-    this._buttonLikeSelector.classList.toggle("button-like_active");
+    this._buttonLike.classList.toggle("button-like_active");
   }
 
   _cardDelete() {
@@ -41,7 +39,8 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._buttonLikeSelector.addEventListener("click", () => {
+    this._buttonLike = this._card.querySelector(".button-like");
+    this._buttonLike.addEventListener("click", () => {
       this._cardLike();
     });
 

@@ -48,10 +48,10 @@ const photoArray = [
   },
 ];
 
-const card = new Card(
-  { name: namePicAdd.value, link: urlAdd.value },
-  ".card-template"
-);
+// const card = new Card(
+//   { name: namePicAdd.value, link: urlAdd.value },
+//   ".card-template"
+// );
 
 /*----универсальное открытие и закрытие модальных окон-------*/
 
@@ -132,16 +132,16 @@ closePic.addEventListener("click", () => closeModal(picOpen)); //закрыть 
 //   return card;
 //  }
 
+const renderCard = (item) => {
+  const card = new Card(item);
+  return card;
+};
 
 const addCard = (event) => {
   event.preventDefault();
-  // const card = new Card(
-  //   { name: namePicAdd.value, link: urlAdd.value },
-  //   ".card-template"
-  // );
+  const card = renderCard({ name: namePicAdd.value, link: urlAdd.value });
   const cardElement = card.generateCard();
   cardContainer.prepend(cardElement);
-
   closeModal(trawelInfoOpen);
 };
 
@@ -150,7 +150,7 @@ formTravel.addEventListener("submit", addCard);
 //Создание карточек
 
 photoArray.forEach((item) => {
-  const cardTemplait = new Card(item, ".card-template");
+  const cardTemplait = renderCard(item);
   const cardElement = cardTemplait.generateCard();
   cardContainer.append(cardElement);
   return cardElement;
