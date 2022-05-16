@@ -1,11 +1,11 @@
 import { openModal } from "./index.js";
 
 export default class Card {
-  constructor(data) {
+  constructor(data, cardSelector) {
     this._name = data.name;
     this._link = data.link;
-    this._cardSelector = document.querySelector(".card-template");
-    this._card = this._cardSelector.content
+    this._cardSelector = cardSelector;
+    this._card = document.querySelector(this._cardSelector).content
       .querySelector(".card")
       .cloneNode(true);
   }
