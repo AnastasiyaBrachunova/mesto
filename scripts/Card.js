@@ -1,4 +1,9 @@
 import { openModal } from "./index.js";
+// import Popup from "./Popup.js";
+
+// const popup = new Popup (formSelector);
+
+
 
 export default class Card {
   constructor(data, cardSelector) {
@@ -35,7 +40,7 @@ export default class Card {
     captureZoom.textContent = this._name;
     picZoom.src = this._link;
     picZoom.alt = this._name;
-    openModal(picOpen);
+    openModal(picOpen); // ТУТ НАДО ПОДУМАТЬ КАК ВЫЗВАТЬ МЕТОД ДРУГОЙ ФУНКЦИИ ВНУТРИ КЛАССА, ЛИБО ЕГО ВООБЩЕ УДАЛИТЬ 
   }
 
   _setEventListeners() {
