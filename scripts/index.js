@@ -1,40 +1,44 @@
 import Card from "./Card.js";
+import Popup from "./Popup.js";
+import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
+
+
+
 import { FormValidator } from "./FormValidator.js";
 import Section from "./Section.js";
-import { photoArray } from "./utils/constants.js";
-// import Popup from "./Popup.js";
+import { photoArray, openModalUserButton,
+  openModalTravelButton, } from "./utils/constants.js";
+
+
 
 
 // /*----------Переменные открытие и закрытие попапов----------------*/
-const modalUserButton = document.querySelector(".edit-button");
-const modalTravelButton = document.querySelector(".add-button");
+
+
+const modalPic = document.getElementById("zoomPic");
+const modalUserInfo = document.getElementById("profilePopup");
+const modalTravelInfo = document.getElementById("trawelInfo");
+
 const userInfoClose = document.getElementById("closeUserInfo");
-const popUpUserInfo = document.getElementById("profilePopup");
+
 const profInfo = document.querySelector(".form__input-container_prof-info");
 const nameInfo = document.querySelector(".form__input-container_name-info");
 const userName = document.querySelector(".profile__name");
 const userInfo = document.querySelector(".profile__job");
-const trawelInfoOpen = document.getElementById("trawelInfo");
 const formUserInfo = document.getElementById("formUserInfo");
 const trawelCardclose = document.getElementById("closeTravel");
+
 /*---------------Переменные для создание новых карточек-----------------------*/
+
 const cardContainer = document.querySelector(".grid-gallery");
 const formTravel = document.getElementById("popUpTravel");
 const namePicAdd = document.getElementById("cardInfo");
 const urlAdd = document.getElementById("urlInfo");
-const picOpen = document.getElementById("modalPic");
-const closePic = document.querySelector(".popup-close_pic");
 
 /*----универсальное открытие и закрытие модальных окон-------*/
 
-// const popup = new Popup (formSelector);
-
-
-
-
-
-
-// @@@@@@@    function escClose(evt) {
+// function escClose(evt) {
 //   if (evt.key === "Escape") {
 //     const popUpOpened = document.querySelector(".popup_opened");
 //     closeModal(popUpOpened);
@@ -55,31 +59,79 @@ const closePic = document.querySelector(".popup-close_pic");
 //   if (evt.target === evt.currentTarget) {
 //     closeModal(evt.target);
 //   }
-// }  ЭТО Я ПЕРЕНЕСЛА В КЛАСС POPUP @@@@@@
+// }
 
+// popUpUserInfo.addEventListener("click", overlayClose); 
+// trawelInfoOpen.addEventListener("click", overlayClose); 
+// picOpen.addEventListener("click", overlayClose);
 
-popUpUserInfo.addEventListener("click", overlayClose);
-trawelInfoOpen.addEventListener("click", overlayClose);
-picOpen.addEventListener("click", overlayClose);
+const popupTravel = new Popup (modalTravelInfo);
+const popupUserInfo = new Popup (modalUserInfo);
+const popupPic = new Popup (modalPic)
 
-/*-----------------------------------------------------------*/
-function openPropfilePopUp() {
+openModalUserButton.addEventListener('click', () => {
   nameInfo.value = userName.textContent;
   profInfo.value = userInfo.textContent;
-  openModal(popUpUserInfo);
-}
-
-modalUserButton.addEventListener("click", () => {
   formUserInfoValidation.resetForm();
   formUserInfoValidation.enableSubmitButton();
-  openPropfilePopUp();
-});
+  popupUserInfo.openPopup();
+})
 
-userInfoClose.addEventListener("click", () => {
-  closeModal(popUpUserInfo);
-});
+openModalTravelButton.addEventListener('click', () => {
+  formTravel.reset();
+  formTravelValidation.resetForm();
+  formTravelValidation.disableSubmitButton();
+  popupTravel.openPopup();
+})
+
+popupTravel.setEventListeners();
+popupUserInfo.setEventListeners();
+popupPic.setEventListeners();
+
+/*-----------------------------------------------------------*/
+openModalUserButton.addEventListener('click', () => {
+  const PopupUserFormSubmit = new PopupWithForm({formSelector: modalUserInfo,
+    handleFormSubmit: (formData) => {
+      const dataValue = [{
+        nameInfo: formData.userName,
+        profInfo: formData.userInfo
+      }]
+      console.log(dataValue)
+    }
+    })
+    PopupUserFormSubmit.setEventListeners()
+}) 
+
+openModalTravelButton.addEventListener('click', () => {
+  const PopupTravelFormSubmit = new PopupWithForm({formSelector: modalTravelInfo,
+    handleFormSubmit: (formData) => {
+      const dataValue = [{
+        name: formData.namecards,
+        link: formData.linkcards
+      }]
+      console.log(dataValue)
+    }
+    })
+    PopupTravelFormSubmit.setEventListeners()
+}) // проверить как работатет с удалением в addCard cardElement
+
+
+
+
+
+
+// openModalUserButton.addEventListener("click", () => {
+//   formUserInfoValidation.resetForm();
+//   formUserInfoValidation.enableSubmitButton();
+//   valuePropfilePopUp();
+// });
+
+// userInfoClose.addEventListener("click", () => {
+//   closeModal(modalUserInfo);
+// });
 
 /*------ заполнение информации пользователя и отправка формы---------------- */
+
 const formUserInfoSubmit = document.getElementById("formUserInfo");
 
 function saveInfoModal() {
@@ -90,26 +142,27 @@ function saveInfoModal() {
 formUserInfoSubmit.addEventListener("submit", (evt) => {
   evt.preventDefault();
   saveInfoModal();
-  closeModal(popUpUserInfo);
+  // closeModal(modalUserInfo);
 });
 
 /*-------вкл/выкл попап добавления картинок----------*/
 
-modalTravelButton.addEventListener("click", () => {
-  formTravel.reset();
-  formTravelValidation.resetForm();
-  formTravelValidation.disableSubmitButton();
-  openModal(trawelInfoOpen);
-});
+// openModalTravelButton.addEventListener("click", () => {
+//   formTravel.reset();
+//   formTravelValidation.resetForm();
+//   formTravelValidation.disableSubmitButton();
+//   // openModal(modalTravelInfo);
+// });
 
-trawelCardclose.addEventListener("click", () => closeModal(trawelInfoOpen));
+// trawelCardclose.addEventListener("click", () => closeModal(modalTravelInfo));
 
-closePic.addEventListener("click", () => closeModal(picOpen)); //закрыть картинку
+// closePic.addEventListener("click", () => closeModal(modalPic)); //закрыть картинку
 
 /*---------Добавление карточек через кнопку Создать------*/
 
 export const renderCard = (item) => {
   const card = new Card(item, ".card-template");
+  // return card;
   return card.generateCard();
 };
 
@@ -119,8 +172,9 @@ const addCard = (event) => {
     name: namePicAdd.value,
     link: urlAdd.value,
   });
+  // const cardElement = card.generateCard();
   cardContainer.prepend(cardElement);
-  closeModal(trawelInfoOpen);
+  closeModal(modalTravelInfo);
 };
 
 formTravel.addEventListener("submit", addCard);
@@ -133,10 +187,11 @@ const cardList = new Section(
   },
   ".grid-gallery"
 );
-
 cardList.renderer();
 
+
 // ВКЛЮЧЕНИЕ ВАЛИДАЦИИ
+
 const formForValidation = {
   formInput: ".form__input-container",
   buttonElement: ".form__button-submit",
@@ -150,7 +205,23 @@ const formUserInfoValidation = new FormValidator(
   formForValidation,
   formUserInfo
 );
-formUserInfoValidation.enableValidation();
 
+formUserInfoValidation.enableValidation();
 const formTravelValidation = new FormValidator(formForValidation, formTravel);
+
 formTravelValidation.enableValidation();
+
+
+
+
+const modalWithImage = new PopupWithImage(modalPic) 
+
+const imageCard = document.querySelectorAll(".card__pic");
+
+imageCard.forEach((item) => { 
+ 
+  item.addEventListener("click", () => {
+    modalWithImage.openPopupImage(item.src, item.alt)
+  });
+
+}); 
