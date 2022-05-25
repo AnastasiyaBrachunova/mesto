@@ -6,7 +6,7 @@ export default class PopupWithImage extends Popup {
     super(formSelector);
   }
 
-  openPopupImage(src, alt) {
+  openImage(src, alt) {
     super.openPopup();
     captureModalPic.textContent = alt;
     imageModalPic.src = src;

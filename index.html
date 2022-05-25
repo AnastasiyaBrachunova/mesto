@@ -17,9 +17,9 @@
     <section class="profile">
       <img class="profile__avatar" src="./image/Avatar.png" alt="фото профиля">
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <h1 class="profile__name">Жак Ив Кусто</h1>
         <button type="button" class="edit-button button"></button>
-        <p class="profile__job">Исследователь океана</p>
+        <p class="profile__job">Исследователь</p>
       </div>
       <button type="button" class="add-button button"></button>
     </section>
@@ -50,7 +50,7 @@
         <h2 class="form__heading">Редактировать профиль</h2>
         <input 
         class="form__input-container form__input-container_name-info" 
-        id="name" type="text"
+        id="name" type="text" name="userName"
         placeholder="Ваше имя"
         autocomplete="off"  
         minlength="2" 
@@ -60,7 +60,7 @@
         <span id="name-error" class ="form__input-error name-error"></span>
         <input 
         class="form__input-container form__input-container_prof-info" 
-        id="prof-info" 
+        id="prof-info" name="profInfo"
         type="text"
         placeholder="Род деятельности"
         autocomplete="off"  
@@ -83,7 +83,7 @@
         <h2 class="form__heading">Новое место</h2>
         <input 
         class="form__input-container form__input-container_cardInfo" 
-        id="cardInfo" 
+        id="cardInfo" name="nameCard"
         type="text"
         autocomplete="off"  
         placeholder="Название" 
@@ -94,7 +94,7 @@
         <span id="cardInfo-error" class ="form__input-error cardInfo-error"></span>
         <input 
         class="form__input-container form__input-container_urlInfo" 
-        id="urlInfo" 
+        id="urlInfo" name="linkImage"
         type="url"
         autocomplete="off" 
         placeholder="Ссылка на картинку" 

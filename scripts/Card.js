@@ -1,11 +1,13 @@
 export default class Card { 
-  constructor(data, cardSelector) { 
+  constructor(data, cardSelector, handleCardClick) { 
     this._name = data.name; 
     this._link = data.link; 
     this._cardSelector = cardSelector; 
+    this.handleCardClick = handleCardClick;
     this._card = document.querySelector(this._cardSelector).content 
     .querySelector(".card") 
     .cloneNode(true); 
+
   } 
 
  
@@ -29,6 +31,7 @@ export default class Card {
 
   _setEventListeners() { 
     this._buttonLike = this._card.querySelector(".button-like"); 
+
     this._buttonLike.addEventListener("click", () => { 
       this._cardLike(); 
     }); 
@@ -36,5 +39,8 @@ export default class Card {
     this._card.querySelector(".card__delete").addEventListener("click", () => { 
       this._cardDelete(); 
     }); 
+
+    this._card.querySelector(".card__pic").addEventListener("click", this.handleCardClick)
+
   } 
 } 
