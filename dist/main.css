@@ -1004,9 +1004,7 @@ cursor: default;
   \**************************************************************************************************************************************************/
 .card {
   position: relative;
-  display: grid;
-  grid-template-columns: 282px;
-  grid-template-rows: 282px 1fr;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -1036,7 +1034,7 @@ cursor: default;
   \*************************************************************************************************************************************************************/
 .card__pic {
   width: 100%;
-  height: 100%;
+  height: 282px;
   object-fit: cover;
   object-position: center;
   border-top-right-radius: 10px;
