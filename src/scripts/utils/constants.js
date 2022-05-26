@@ -15,26 +15,26 @@ export const formTravel = document.getElementById("popUpTravel");
 export const photoArray = [
   {
     name: "Коста-Рика",
-    link: "./images/Costa_Rica.jpg",
+    link: "https://breeze.ru/files/images/puerto-quepos_1.jpg",
   },
   {
     name: "Греция",
-    link: "./images/Greece.jpg",
+    link: "https://traveltimes.ru/wp-content/uploads/2021/06/greciya-vizy.jpg",
   },
   {
     name: "Австралия",
-    link: "./images/Blue_Mountains_Australia.jpg",
+    link: "https://tranio.ru/articles/4389/aet12qktuul1.shutterstock_1094901527.jpg",
   },
   {
     name: "Индия",
-    link: "./images/India1.jpg",
+    link: "https://img5.goodfon.ru/wallpaper/nbig/3/c1/indiia-tadzh-makhal-khram-dvorets-bashni-kupola-gazony-derev.jpg",
   },
   {
     name: "Франция",
-    link: "./images/Isola_france.jpg",
+    link: "https://a.d-cd.net/1f25g6s-1920.jpg",
   },
   {
     name: "Рио-де-Жанейро",
-    link: "./images/Rio_de_Janeiro.jpg",
+    link: "https://apico-tour.ru/wp-content/uploads/2018/11/Christ-the-Rede.jpg",
   },
 ];

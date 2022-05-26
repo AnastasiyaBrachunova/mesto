@@ -26,6 +26,7 @@ module.exports = {
   },
   module: {
     rules: [
+
       {
         test: /\.css$/,
         use: [
@@ -38,8 +39,9 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.(png|svg|jpeg|gif|jpg)$/,
         type: "asset/resource",
+
         generator: {
           filename: "images/[name].[contenthash][ext]",
         },
@@ -47,6 +49,7 @@ module.exports = {
       {
         test: /\.(woff|woff2|otf|eot|ttf)$/,
         type: "asset/resource",
+
         generator: {
           filename: "fonts/[name].[contenthash][ext]",
         },
