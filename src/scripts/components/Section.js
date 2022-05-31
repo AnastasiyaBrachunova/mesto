@@ -7,7 +7,6 @@ export default class Section {
     }
 
      renderer(){
-        // this._container.innerHTML ='';
         this._initialArray.forEach((item) => {
             const cardElement = this._renderer(item);
             this.addItem(cardElement)
