@@ -1,7 +1,3 @@
-import {renderCard} from '../index.js'
-
-
-
 export default class Section {
 
     constructor({items, renderer}, containerSelector){
