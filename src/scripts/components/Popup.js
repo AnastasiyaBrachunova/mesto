@@ -1,18 +1,18 @@
 export default class Popup {
-  constructor(formSelector) {
-    this.formSelector = formSelector;
+  constructor(popupSelector) {
+    this.popup = popupSelector;
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   openPopup() {
     // открывает попап и присваивет слушатель закрытия кнопкой
-    this.formSelector.classList.add("popup_opened");
+    this.popup.classList.add("popup_opened");
     document.addEventListener("keydown", this._handleEscClose);
   }
 
   closePopup() {
     // закрывает попап и убирает слушатель закрытия кнопкой
-    this.formSelector.classList.remove("popup_opened");
+    this.popup.classList.remove("popup_opened");
     document.removeEventListener("keydown", this._handleEscClose);
   }
 
@@ -23,14 +23,14 @@ export default class Popup {
     }
   }
 
-  setEventListeners() {
-    document.addEventListener("keydown", this._handleEscClose);
-    this.formSelector.addEventListener("click", (event) => {
-      function selector(element) {
-        return event.target.classList.contains(element);
-      }
+  isContains(element) {
+    return event.target.classList.contains(element);
+  }
 
-      if (selector("popup") || selector("popup-close")) {
+  setEventListeners() {
+    this.popup.addEventListener("click", (event) => {
+      
+      if (this.isContains("popup") || this.isContains("popup-close")) {
         this.closePopup();
       }
     });

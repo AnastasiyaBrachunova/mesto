@@ -1,15 +1,17 @@
 import Popup from "./Popup.js";
-import { captureModalPic, imageModalPic } from "../utils/constants.js";
+// import { captureModalPic, imageModalPic } from "../utils/constants.js";
 
 export default class PopupWithImage extends Popup {
-  constructor(formSelector) {
-    super(formSelector);
+  constructor(popupSelector) {
+    super(popupSelector);
+    this._captureModalPic = document.querySelector(".popup__capture");
+    this._imageModalPic = document.querySelector(".popup__zoom-pic");
   }
 
   openImage(src, alt) {
     super.openPopup();
-    captureModalPic.textContent = alt;
-    imageModalPic.src = src;
-    imageModalPic.alt = alt;
+    this._captureModalPic.textContent = alt;
+    this._imageModalPic.src = src;
+    this._imageModalPic.alt = alt;
   }
 }

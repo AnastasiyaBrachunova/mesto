@@ -10,7 +10,11 @@ export default class Card {
 
   } 
 
- 
+  handleCardClick() {
+    this._card.addEventListener('click', () => 
+    openImage(this._card.textContent, this._card.src)
+    )
+  }
 
   generateCard() { 
     this._setEventListeners(); 
@@ -40,7 +44,7 @@ export default class Card {
       this._cardDelete(); 
     }); 
 
-    this._card.querySelector(".card__pic").addEventListener("click", this.handleCardClick)
+    this._card.querySelector(".card__pic").addEventListener("click", () => this.handleCardClick(this._name, this._link))
 
   } 
 } 

@@ -23,79 +23,72 @@ import {
 
 /*----универсальное открытие и закрытие модальных окон-------*/
 
-const popupTravel = new Popup(modalTravelInfo);
-const popupUserInfo = new Popup(modalUserInfo);
 const popupPic = new Popup(modalPic);
-const inputUserInfo = new UserInfo({
-  firstSelector: ".form__input-container_name-info",
-  secondSelector: ".form__input-container_prof-info",
-});
-
-popupTravel.setEventListeners();
-popupUserInfo.setEventListeners();
 popupPic.setEventListeners();
 
-const handleCardClick = () => {
+const inputUserInfo = new UserInfo({
+  userNameSelector: ".profile__name",
+  userJobSelector: ".profile__job",
+});
 
-  const modalWithImage = new PopupWithImage(modalPic);
-
-  const imageCard = document.querySelectorAll(".card__pic");
-
-  imageCard.forEach((item) => {
-    item.addEventListener("click", () => {
-      modalWithImage.openImage(item.src, item.alt);
+    document.querySelector('.edit-button').addEventListener('click', () => {
+popupUserFormSubmit.openPopup();
     });
-  });
-};
+    document.querySelector('.add-button').addEventListener('click', () => {
+      popupTravelFormSubmit.openPopup();
+      });
+
+const modalWithImage = new PopupWithImage(modalPic);
 
 /*---Установка слушателя на сабмит и получение данных из инпутов--*/
-
-openModalUserButton.addEventListener("click", () => {
-  formUserInfoValidation.resetForm();
-  formUserInfoValidation.enableSubmitButton();
-  popupUserInfo.openPopup();
-  inputUserInfo.getUserInfo({
-    userName: userName.textContent,
-    profInfo: userInfo.textContent,
-  });
-
-  const PopupUserFormSubmit = new PopupWithForm({
-    formSelector: modalUserInfo,
+const popupUserFormSubmit = new PopupWithForm({
+    popupSelector: modalUserInfo,
     handleFormSubmit: (formData) => {
+      inputUserInfo.setUserInfo(formData)
       const dataValue = {
         userName: formData.userName,
         profInfo: formData.profInfo,
       };
       inputUserInfo.setUserInfo(dataValue);
-      console.log(inputUserInfo.setUserInfo(dataValue));
     },
   });
-  PopupUserFormSubmit.setEventListeners();
-});
+popupUserFormSubmit.setEventListeners();
 
-openModalTravelButton.addEventListener("click", () => {
-  formTravel.reset();
-  formTravelValidation.resetForm();
-  formTravelValidation.disableSubmitButton();
-  popupTravel.openPopup();
 
-  const PopupTravelFormSubmit = new PopupWithForm({
-    formSelector: modalTravelInfo,
+openModalUserButton.addEventListener("click", () => {
+  formUserInfoValidation.resetForm();
+  formUserInfoValidation.enableSubmitButton();
+  userName.value = inputUserInfo.getUserInfo().userName;
+  userInfo.value = inputUserInfo.getUserInfo().profInfo;
+}); 
+
+
+const popupTravelFormSubmit = new PopupWithForm({
+    popupSelector: modalTravelInfo,
     handleFormSubmit: (formData) => {
       const dataValue = renderCard({
         name: formData.nameCard,
         link: formData.linkImage,
       });
-      cardContainer.prepend(dataValue);
+      cardList.addItem(dataValue)
     },
   });
-  PopupTravelFormSubmit.setEventListeners();
+popupTravelFormSubmit.setEventListeners();
+
+
+openModalTravelButton.addEventListener("click", () => {
+  formTravel.reset();
+  formTravelValidation.resetForm();
+  formTravelValidation.disableSubmitButton();
 });
 
 /*---------Добавление карточек через кнопку Создать------*/
 
 export const renderCard = (item) => {
-  const card = new Card(item, ".card-template", handleCardClick);
+  const card = new Card(item, ".card-template", (name, link) => {
+
+    modalWithImage.openImage(link, name);
+  });
   // return card;
   return card.generateCard();
 };
@@ -104,7 +97,8 @@ export const renderCard = (item) => {
 
 const cardList = new Section(
   {
-    item: photoArray,
+    items: photoArray, 
+    renderer: renderCard
   },
   ".grid-gallery"
 );
@@ -131,15 +125,4 @@ const formTravelValidation = new FormValidator(formForValidation, formTravel);
 
 formTravelValidation.enableValidation();
 
-/******* Управление модальным окном увеличенного изображения****** */
-// расположено в конце, потому что если поднять выше - не работает
 
-// const modalWithImage = new PopupWithImage(modalPic);
-
-// const imageCard = document.querySelectorAll(".card__pic");
-
-// imageCard.forEach((item) => {
-//   item.addEventListener("click", () => {
-//     modalWithImage.openImage(item.src, item.alt);
-//   });
-// });

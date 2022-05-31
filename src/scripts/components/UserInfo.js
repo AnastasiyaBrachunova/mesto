@@ -1,17 +1,32 @@
 export default class UserInfo {
-  constructor({ firstSelector, secondSelector }) {
-    this.firstElement = document.querySelector(firstSelector);
-    this.secondElement = document.querySelector(secondSelector);
-    this._userName = document.querySelector(".profile__name");
-    this._userJob = document.querySelector(".profile__job");
-  }
-  setUserInfo(info) {
-    (this._userName.textContent = info.userName),
-    (this._userJob.textContent = info.profInfo);
+  constructor({ userNameSelector, userJobSelector }) {
+
+    this._userName = document.querySelector(userNameSelector);
+    this._userJob = document.querySelector(userJobSelector);
   }
 
-  getUserInfo(formData) {
-    this.firstElement.value = formData.userName;
-    this.secondElement.value = formData.profInfo;
+  getUserInfo(){
+    const profile = {
+      userName: this._userName.textContent,
+      profInfo: this._userJob.textContent
+    }
+    return profile
   }
+
+setUserInfo(formData) {
+  this._userName.textContent = formData.userName;
+  this._userJob.textContent = formData.profInfo;
+}
+
+
+
+  // setUserInfo(info) { // типа гет
+  //   (this._userName.textContent = info.userName),
+  //   (this._userJob.textContent = info.profInfo);
+  // }
+
+  // getUserInfo(formData) { //типа сет
+  //   this.firstElement.value = formData.userName;
+  //   this.secondElement.value = formData.profInfo;
+  // }
 }
