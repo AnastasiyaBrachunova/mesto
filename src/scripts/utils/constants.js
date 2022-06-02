@@ -3,13 +3,14 @@ export const openModalTravelButton = document.querySelector(".add-button");
 export const modalTravelInfo = document.getElementById("trawelInfo");
 export const modalUserInfo = document.getElementById("profilePopup");
 export const modalPic = document.getElementById("zoomPic");
-export const userName = document.querySelector(".form__input-container_name-info");
-export const userInfo = document.querySelector(".form__input-container_prof-info");
+export const userName = document.querySelector(
+  ".form__input-container_name-info"
+);
+export const userInfo = document.querySelector(
+  ".form__input-container_prof-info"
+);
 export const formUserInfo = document.getElementById("formUserInfo");
 export const formTravel = document.getElementById("popUpTravel");
-
-
-
 
 export const photoArray = [
   {

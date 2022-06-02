@@ -5,5 +5,5 @@
 }
 
 .button:disabled {
-cursor: default;
+  cursor: default;
 }

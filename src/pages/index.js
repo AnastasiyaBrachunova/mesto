@@ -19,13 +19,10 @@ import Popup from "../scripts/components/Popup";
 
 /*----универсальное открытие и закрытие модальных окон-------*/
 
-
-
 const inputUserInfo = new UserInfo({
   userNameSelector: ".profile__name",
   userJobSelector: ".profile__job",
 });
-
 
 document.querySelector(".edit-button").addEventListener("click", () => {
   popupUserFormSubmit.openPopup();
