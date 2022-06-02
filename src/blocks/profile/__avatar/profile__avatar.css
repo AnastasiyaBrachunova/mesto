@@ -1,7 +1,11 @@
 .profile__avatar {
-  max-width: 168.75px;
-  max-height: 127.5px;
-  margin: 0;
+  z-index: 1; 
+  border-radius: 50%; 
+  width: 120px; 
+  height: 120px; 
+  grid-row: 1; 
+  grid-column: 1; 
+  object-fit: cover;
 }
 @media (max-width: 540px) {
   .profile__avatar {

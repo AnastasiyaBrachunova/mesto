@@ -6,27 +6,14 @@ export default class UserInfo {
   }
 
   getUserInfo(){
-    const profile = {
+    return {
       userName: this._userName.textContent,
       profInfo: this._userJob.textContent
     }
-    return profile
   }
 
-setUserInfo(formData) {
-  this._userName.textContent = formData.userName;
-  this._userJob.textContent = formData.profInfo;
+setUserInfo({ userName, profInfo }) {
+  this._userName.textContent = userName;
+  this._userJob.textContent = profInfo;
 }
-
-
-
-  // setUserInfo(info) { // типа гет
-  //   (this._userName.textContent = info.userName),
-  //   (this._userJob.textContent = info.profInfo);
-  // }
-
-  // getUserInfo(formData) { //типа сет
-  //   this.firstElement.value = formData.userName;
-  //   this.secondElement.value = formData.profInfo;
-  // }
 }

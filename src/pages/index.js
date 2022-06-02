@@ -1,6 +1,5 @@
-import "../pages/index.css"
+import "../pages/index.css";
 import Card from "../scripts/components/Card.js";
-import Popup from "../scripts/components/Popup.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import UserInfo from "../scripts/components/UserInfo.js";
@@ -11,70 +10,58 @@ import {
   photoArray,
   openModalUserButton,
   openModalTravelButton,
-  cardContainer,
-  modalPic,
-  modalUserInfo,
-  modalTravelInfo,
   userName,
   userInfo,
   formUserInfo,
   formTravel,
 } from "../scripts/utils/constants.js";
+import Popup from "../scripts/components/Popup";
 
 /*----универсальное открытие и закрытие модальных окон-------*/
 
-const popupPic = new Popup(modalPic);
-popupPic.setEventListeners();
+
 
 const inputUserInfo = new UserInfo({
   userNameSelector: ".profile__name",
   userJobSelector: ".profile__job",
 });
 
-    document.querySelector('.edit-button').addEventListener('click', () => {
-popupUserFormSubmit.openPopup();
-    });
-    document.querySelector('.add-button').addEventListener('click', () => {
-      popupTravelFormSubmit.openPopup();
-      });
 
-const modalWithImage = new PopupWithImage(modalPic);
+document.querySelector(".edit-button").addEventListener("click", () => {
+  popupUserFormSubmit.openPopup();
+});
+document.querySelector(".add-button").addEventListener("click", () => {
+  popupTravelFormSubmit.openPopup();
+});
+
+const modalWithImage = new PopupWithImage("zoomPic");
 
 /*---Установка слушателя на сабмит и получение данных из инпутов--*/
 const popupUserFormSubmit = new PopupWithForm({
-    popupSelector: modalUserInfo,
-    handleFormSubmit: (formData) => {
-      inputUserInfo.setUserInfo(formData)
-      const dataValue = {
-        userName: formData.userName,
-        profInfo: formData.profInfo,
-      };
-      inputUserInfo.setUserInfo(dataValue);
-    },
-  });
+  popupSelector: "profilePopup",
+  handleFormSubmit: (formData) => {
+    inputUserInfo.setUserInfo(formData);
+  },
+});
 popupUserFormSubmit.setEventListeners();
 
-
 openModalUserButton.addEventListener("click", () => {
+  const getUserInfo = inputUserInfo.getUserInfo();
+
   formUserInfoValidation.resetForm();
   formUserInfoValidation.enableSubmitButton();
-  userName.value = inputUserInfo.getUserInfo().userName;
-  userInfo.value = inputUserInfo.getUserInfo().profInfo;
-}); 
-
+  userName.value = getUserInfo.userName;
+  userInfo.value = getUserInfo.profInfo;
+});
 
 const popupTravelFormSubmit = new PopupWithForm({
-    popupSelector: modalTravelInfo,
-    handleFormSubmit: (formData) => {
-      const dataValue = renderCard({
-        name: formData.nameCard,
-        link: formData.linkImage,
-      });
-      cardList.addItem(dataValue)
-    },
-  });
+  popupSelector: "trawelInfo",
+  handleFormSubmit: (formData) => {
+    const dataValue = renderCard(formData);
+    cardList.addItem(dataValue);
+  },
+});
 popupTravelFormSubmit.setEventListeners();
-
 
 openModalTravelButton.addEventListener("click", () => {
   formTravel.reset();
@@ -86,10 +73,9 @@ openModalTravelButton.addEventListener("click", () => {
 
 const renderCard = (item) => {
   const card = new Card(item, ".card-template", (name, link) => {
-
     modalWithImage.openImage(link, name);
+    modalWithImage.setEventListeners();
   });
-  // return card;
   return card.generateCard();
 };
 
@@ -97,8 +83,14 @@ const renderCard = (item) => {
 
 const cardList = new Section(
   {
-    items: photoArray, 
-    renderer: renderCard
+    items: photoArray,
+    renderItems: (item) => {
+      const card = new Card(item, ".card-template", (name, link) => {
+        modalWithImage.openImage(link, name);
+        modalWithImage.setEventListeners();
+      });
+      return card.generateCard();
+    },
   },
   ".grid-gallery"
 );
@@ -124,5 +116,3 @@ formUserInfoValidation.enableValidation();
 const formTravelValidation = new FormValidator(formForValidation, formTravel);
 
 formTravelValidation.enableValidation();
-
-

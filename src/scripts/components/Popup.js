@@ -1,6 +1,6 @@
 export default class Popup {
   constructor(popupSelector) {
-    this.popup = popupSelector;
+    this.popup = document.getElementById(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 
@@ -23,14 +23,14 @@ export default class Popup {
     }
   }
 
-  isContains(element) {
+  isContains(element, event) {
     return event.target.classList.contains(element);
   }
 
   setEventListeners() {
     this.popup.addEventListener("click", (event) => {
       
-      if (this.isContains("popup") || this.isContains("popup-close")) {
+      if (this.isContains("popup", event) || this.isContains("popup-close", event)) {
         this.closePopup();
       }
     });
