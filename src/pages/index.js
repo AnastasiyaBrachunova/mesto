@@ -32,6 +32,7 @@ document.querySelector(".add-button").addEventListener("click", () => {
 });
 
 const modalWithImage = new PopupWithImage("zoomPic");
+modalWithImage.setEventListeners();
 
 /*---Установка слушателя на сабмит и получение данных из инпутов--*/
 const popupUserFormSubmit = new PopupWithForm({
@@ -66,32 +67,28 @@ openModalTravelButton.addEventListener("click", () => {
   formTravelValidation.disableSubmitButton();
 });
 
-/*---------Добавление карточек через кнопку Создать------*/
 
 const renderCard = (item) => {
   const card = new Card(item, ".card-template", (name, link) => {
     modalWithImage.openImage(link, name);
-    modalWithImage.setEventListeners();
   });
   return card.generateCard();
 };
+
 
 //Отрисовывание карточек
 
 const cardList = new Section(
   {
     items: photoArray,
-    renderItems: (item) => {
-      const card = new Card(item, ".card-template", (name, link) => {
-        modalWithImage.openImage(link, name);
-        modalWithImage.setEventListeners();
-      });
-      return card.generateCard();
+    renderer:  (item) => { // функция для отрисоки 1 элемента называется renderer
+      const card = renderCard(item); // переиспользовали функцию создания карточки
+      cardList.addItem(card); // вставили в разметку с помощью имеющегося метода класса Section
     },
   },
   ".grid-gallery"
 );
-cardList.renderer();
+cardList.renderItems();
 
 // ВКЛЮЧЕНИЕ ВАЛИДАЦИИ
 
