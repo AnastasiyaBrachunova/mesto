@@ -15,7 +15,6 @@ import {
   formUserInfo,
   formTravel,
 } from "../scripts/utils/constants.js";
-import Popup from "../scripts/components/Popup";
 
 /*----универсальное открытие и закрытие модальных окон-------*/
 
