@@ -16,7 +16,7 @@
   <main class="container">
     <section class="profile">
       <div class="profile__avatar-box">
-        <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="фото профиля">
+        <img class="profile__avatar" alt="фото профиля">
         <div class="profile__overlay">
           <div class="profile__overlay-background"></div>
           <img src="<%=require('./images/editAvatar.svg')%>" class="profile__change-avatar">
@@ -25,9 +25,9 @@
 
       </div>
       <div class="profile__info">
-        <h1 class="profile__name">Жак Ив Кусто</h1>
+        <h1 class="profile__name"></h1>
         <button type="button" class="edit-button button"></button>
-        <p class="profile__job">Исследователь</p>
+        <p class="profile__job"></p>
       </div>
       <button type="button" class="add-button button"></button>
     </section>
@@ -100,7 +100,35 @@
     </div>
   </div>
 
+  <!-- Модальное окно смены аватара -->
+  <section class="popup" id="avatarChange">
+    <div class="popup__body">
+      <button class="popup-close button" id="closeAvatar" type="button"></button>
+      <form class="form" id="popupAvatar" name="avatar" novalidate>
+        <h2 class="form__heading">Обновить аватар</h2>
 
+        <input class="form__input-container form__input-container_urlInfo" id="avatarLink" name="avatarLink" type="url"
+          autocomplete="off" placeholder="Ссылка на картинку" required />
+        <span id="urlInfo-error" class="form__input-error urlInfo-error"></span>
+
+        <button class="form__button-submit form__button-submit_avatar button" id="avatarUpdate " type="submit"
+          value="Сохранить">Сохранить</button>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- Модальное окно удаления карточки -->
+  <section class="popup" id="popupCardDelete">
+    <div class="popup__body">
+      <button class="popup-close button" id="closeCardDelete" type="button"></button>
+      <form class="form" id="cardDelete" name="cardDelete" novalidate>
+        <h2 class="form__heading form__heading_card-delete">Вы уверены?</h2>
+        <button class="form__button-submit form__button-submit_delete button" id="delCard " type="submit"
+          value="Да">Да</button>
+      </form>
+    </div>
+  </section>
 
 </body>
 
