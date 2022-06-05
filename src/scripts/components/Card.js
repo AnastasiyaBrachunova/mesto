@@ -4,6 +4,7 @@ export default class Card {
     cardSelector,
     userId
   ) {
+    console.log(data)  // объект с лайками приходит
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -16,7 +17,7 @@ export default class Card {
     this.handleDeleteClick = handleDeleteClick;
   }
 
-  _getTamplate() {
+  _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
       .content.querySelector(".card")
