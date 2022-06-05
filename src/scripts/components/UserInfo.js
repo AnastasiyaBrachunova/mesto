@@ -10,6 +10,7 @@ export default class UserInfo {
     return {
       userName: this._userName.textContent,
       profInfo: this._userJob.textContent,
+      avatar: this._userAvatar.src
     };
   }
 

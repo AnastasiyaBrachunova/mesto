@@ -9,6 +9,8 @@ export const userName = document.querySelector(
 export const userInfo = document.querySelector(
   ".form__input-container_prof-info"
 );
+
+export const cardsContainer = document.querySelector('.grid-gallery');
 export const formUserInfo = document.getElementById("formUserInfo");
 export const formTravel = document.getElementById("popUpTravel");
 

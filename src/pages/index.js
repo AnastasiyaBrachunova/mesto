@@ -15,6 +15,7 @@ import {
   userInfo,
   formUserInfo,
   formTravel,
+  cardsContainer
 
 } from "../scripts/utils/constants.js";
 
@@ -38,9 +39,28 @@ api.getUserInfo().then((userInfoApi)=>{
     userNameSelector: ".profile__name",
     userJobSelector: ".profile__job",
     avatarSelector: ".profile__avatar"
+    
   });
 
-  inputUserInfo.setUserInfo({userName: userInfoApi.name, profInfo: userInfoApi.about, avatar: userInfoApi.avatar }) // получение информации о пользователе  пользователя с сервера
+  const initialCardsPromise = () => api.getInitialCards().then((cardsApi) =>{
+    const cardList = new Section(
+      {
+        items: cardsApi,
+        renderer:  (item) => { // функция для отрисоки 1 элемента называется renderer
+          const card = renderCard(item); // переиспользовали функцию создания карточки
+          cardList.addItem(card); // вставили в разметку с помощью имеющегося метода класса Section
+        },
+      },
+      ".grid-gallery"
+    );
+    cardList.renderItems();
+   })
+
+  initialCardsPromise();
+
+
+  // получение информации о пользователе  пользователя с сервера
+  inputUserInfo.setUserInfo({userName: userInfoApi.name, profInfo: userInfoApi.about, avatar: userInfoApi.avatar }) 
   
   document.querySelector(".edit-button").addEventListener("click", () => {
     popupUserFormSubmit.openPopup();
@@ -62,7 +82,8 @@ api.getUserInfo().then((userInfoApi)=>{
   
   
  ////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-  /*---Установка слушателя на сабмит и получение данных из инпутов--*/
+  /*---Установка слушателя на сабмит, получение данных из инпутов смена ифно пользователя--*/
+  //
   const popupUserFormSubmit = new PopupWithForm({
     popupSelector: "profilePopup",
     handleFormSubmit: (formData) => {
@@ -72,11 +93,25 @@ api.getUserInfo().then((userInfoApi)=>{
     },
   });
   popupUserFormSubmit.setEventListeners();
-  
+/////////////////////////////////////////////////////////////////////////////////
+// смена аватарки
+  const popupChangeAvatar = new PopupWithForm({
+    popupSelector: "avatarChange",
+    handleFormSubmit:(formData) =>{
+    api.setUserAvatar(formData.avatar).then((userInfoApi)=>{
+      console.log(userInfoApi)
+      inputUserInfo.setUserInfo({userName: userInfoApi.name, profInfo: userInfoApi.about, avatar: userInfoApi.avatar })
+    })
+    }
+  })
+  popupChangeAvatar.setEventListeners();
+
+ 
 
 
 
-  //////////////////////////////////////////////////////////////////////////////////////////
+
+
   openModalUserButton.addEventListener("click", () => {
     const getUserInfo = inputUserInfo.getUserInfo();
   
@@ -85,12 +120,21 @@ api.getUserInfo().then((userInfoApi)=>{
     userName.value = getUserInfo.userName;
     userInfo.value = getUserInfo.profInfo;
   });
+  /////////////////////////////////////////////////////////////////
+
   
+
   const popupTravelFormSubmit = new PopupWithForm({
     popupSelector: "trawelInfo",
     handleFormSubmit: (formData) => {
-      const dataValue = renderCard(formData);
-      cardList.addItem(dataValue);
+      api.setInitialCard(formData.name, formData.link).then((res) => {
+        console.log(res)
+        if (res) {
+          cardsContainer.innerHTML = '';
+          initialCardsPromise()
+        };
+      })
+
     },
   });
   popupTravelFormSubmit.setEventListeners();
@@ -101,6 +145,8 @@ api.getUserInfo().then((userInfoApi)=>{
     formTravelValidation.disableSubmitButton();
   });
   
+
+  
   
   const renderCard = (item) => {
     const card = new Card(item, ".card-template", (name, link) => {
@@ -110,20 +156,8 @@ api.getUserInfo().then((userInfoApi)=>{
   };
   
   
-  //Отрисовывание карточек
- api.getInitialCards().then((cardsApi) =>{
-  const cardList = new Section(
-    {
-      items: cardsApi,
-      renderer:  (item) => { // функция для отрисоки 1 элемента называется renderer
-        const card = renderCard(item); // переиспользовали функцию создания карточки
-        cardList.addItem(card); // вставили в разметку с помощью имеющегося метода класса Section
-      },
-    },
-    ".grid-gallery"
-  );
-  cardList.renderItems();
- })
+  //Отрисовывание карточек с сервера
+ 
 
  
 
