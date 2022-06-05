@@ -47,6 +47,7 @@
 @import url(../blocks/grid-gallery/grid-gallery.css);
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__delete/card__delete.css);
+@import url(../blocks/card/__delete/_hidden/card__delete_hidden.css);
 @import url(../blocks/card/__pic/card__pic.css);
 @import url(../blocks/card/__item/card__item.css);
 @import url(../blocks/card/__caption/card__caption.css);

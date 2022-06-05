@@ -8,7 +8,6 @@ import Api from "../scripts/components/Api.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
 import Section from "../scripts/components/Section.js";
 import {
-  photoArray,
   openModalUserButton,
   openModalTravelButton,
   userName,
@@ -18,6 +17,7 @@ import {
   cardsContainer
 
 } from "../scripts/utils/constants.js";
+import { data } from "autoprefixer";
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-42',
@@ -94,6 +94,10 @@ api.getUserInfo().then((userInfoApi)=>{
   });
   popupUserFormSubmit.setEventListeners();
 /////////////////////////////////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////
 // смена аватарки
   const popupChangeAvatar = new PopupWithForm({
     popupSelector: "avatarChange",
@@ -128,7 +132,6 @@ api.getUserInfo().then((userInfoApi)=>{
     popupSelector: "trawelInfo",
     handleFormSubmit: (formData) => {
       api.setInitialCard(formData.name, formData.link).then((res) => {
-        console.log(res)
         if (res) {
           cardsContainer.innerHTML = '';
           initialCardsPromise()
@@ -145,23 +148,62 @@ api.getUserInfo().then((userInfoApi)=>{
     formTravelValidation.disableSubmitButton();
   });
   
+  const popupDelCard = new PopupWithForm({
+    popupSelector: 'popupCardDelete'
+  })  // создала новый экземпляр класса обработчиа 
+
 
   
+ 
+  // const renderCard = (item) => {
+  //   const card = new Card(item, ".card-template", (name, link) => {
+  //     modalWithImage.openImage(link, name)},);
+  //   return card.generateCard();
+  // };
   
-  const renderCard = (item) => {
-    const card = new Card(item, ".card-template", (name, link) => {
-      modalWithImage.openImage(link, name);
-    });
-    return card.generateCard();
-  };
-  
+const renderCard = (item) =>{
+  const card = new Card ({data:item,
+    handleCardClick: (name, link) => {
+      modalWithImage.openImage(link, name)},
+    handleLikeClick: ()=> {
+      const idCard = card.getCardId();
+      if (card.whoLikes(card)){
+        api.remLikeCard(idCard).then((res)=>{
+          card._cardLikeToggle();
+          card.counterLikes(res.likes.length);
+        })
+        .catch((err)=>{
+          console.log(`Ошибка дизлайка ${err}`)})
+        } else{
+          api.addLikeCard(idCad).then((res)=>{
+            card._cardLikeToggle();
+            card.counterLikes(res.likes.length);
+          })
+          .catch((err)=>{
+            console.log(`Ошибка лайка ${err}`)})
+        }},
+    handleDeleteClick: (event)=>{
+      const idCard = card.getCardId();
+      const cardElement = event.target.closest('.card');
+      popupDelCard.setEventListeners(()=>{
+        api.delInitialCards(idCard).then(()=>{
+          cardElement.remove();
+          popupDelCard.closePopup();
+        })
+        .catch((err)=>{
+          console.log(`Ошибка удаления изображения ${err}`)
+        })
+      })
+      popupDelCard.openPopup();
+    }
+  },  ".card-template", inputUserInfo.getUserInfo().id)
+  return card.generateCard();
+}
+
   
   //Отрисовывание карточек с сервера
  
 
- 
-
-  
   
   // ВКЛЮЧЕНИЕ ВАЛИДАЦИИ
   
