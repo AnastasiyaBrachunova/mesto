@@ -65,6 +65,7 @@ api.getUserInfo().then((userInfoApi) => {
   formTravelValidation.enableValidation();
 
   const formChangeAvatarValidation = new FormValidator(formForValidation, formChangeAvatar);
+  formChangeAvatarValidation.enableValidation();
 
 
 
@@ -95,7 +96,6 @@ api.getUserInfo().then((userInfoApi) => {
   document.querySelector(".profile__overlay").addEventListener("click", () => {
     const modalAvatarChange = new Popup("avatarChange");
     modalAvatarChange.openPopup();
-    formChangeAvatarValidation.enableValidation();
     modalAvatarChange.setEventListeners();
   }); // открытие модалки редактирования фотки
 
