@@ -50,9 +50,10 @@ export default class Card {
     return this._id;
   }
 
-  whoLikes(item) {
+  whoLikes(like) {
     // получаем количество лайков
-    return this._likes.some((like) => like._id === this._userId._id)
+    // console.log(like)
+    return this._likes.some((like) => like._id === this._userId)
   }
 
   cardDelete() { 

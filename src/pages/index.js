@@ -19,7 +19,6 @@ import {
   cardsContainer,
   formForValidation,
 } from "../scripts/utils/constants.js";
-import { data, postcss } from "autoprefixer";
 
 const api = new Api({
   url: "https://mesto.nomoreparties.co/v1/cohort-42",
@@ -230,7 +229,7 @@ const submitDelete = new PopupWithDelete('popupCardDelete')
           }
         },
 
-        handleDeleteClick: (item) => {
+        handleDeleteClick: (event) => {
 
           const idCard = card.getCardId();
           // const cardElement = event.target.closest(".card");
