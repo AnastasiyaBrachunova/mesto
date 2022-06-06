@@ -108,7 +108,7 @@ api.getUserInfo().then((userInfoApi) => {
           userName: userInfoApi.name,
           profInfo: userInfoApi.about,
           avatar: userInfoApi.avatar,
-          id: userInfoApi._id
+          id: userInfoApi._id,
         });
       });
     },
@@ -204,12 +204,11 @@ api.getUserInfo().then((userInfoApi) => {
         },
       },
       ".card-template",
-      inputUserInfo.getUserInfo().id
+      userInfoApi._id
     );
     return card.generateCard();
   };
 
-  
   //Отрисовывание карточек с сервера
 
   // ВКЛЮЧЕНИЕ ВАЛИДАЦИИ

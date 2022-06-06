@@ -4,7 +4,6 @@ export default class Card {
     cardSelector,
     userId
   ) {
-    console.log(data)
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -81,8 +80,8 @@ export default class Card {
   _swithTrashCan() {
     // переключатель состояния корзины
     if (this._userId !== this._owner._id) {
-      console.log(this._owner._id)
-      
+      console.log(this._userId, this._owner._id);
+
       // если хозяин картинки не я, то скрыть значок
       this._trashCanButton.classList.add("card__delete_hidden");
     } else {
