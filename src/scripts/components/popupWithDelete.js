@@ -5,7 +5,7 @@ export default class PopupWithDelete extends Popup {
     this._popupForm = this.popup.querySelector(".form");
   }
 
-  open(handleFormSubmit) {
+  setSubmit(handleFormSubmit) {
     this._handleFormSubmit = handleFormSubmit;
   }
 

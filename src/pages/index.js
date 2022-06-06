@@ -2,6 +2,7 @@ import "../pages/index.css";
 import Card from "../scripts/components/Card.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import PopupWithDelete from "../scripts/components/popupWithDelete";
 import UserInfo from "../scripts/components/UserInfo.js";
 import Popup from "../scripts/components/Popup.js";
 import Api from "../scripts/components/Api.js";
@@ -18,7 +19,7 @@ import {
   cardsContainer,
   formForValidation,
 } from "../scripts/utils/constants.js";
-import { data } from "autoprefixer";
+import { data, postcss } from "autoprefixer";
 
 const api = new Api({
   url: "https://mesto.nomoreparties.co/v1/cohort-42",
@@ -125,8 +126,7 @@ api.getUserInfo().then((userInfoApi) => {
   popupUserFormSubmit.setEventListeners();
   /////////////////////////////////////////////////////////////////////////////////
 
-  //////////////////////////////////////////////////////////////////////////////////////
-  // смена аватарки
+    // смена аватарки
   const popupChangeAvatar = new PopupWithForm({
     popupSelector: "avatarChange",
     handleFormSubmit: (formData) => {
@@ -189,11 +189,11 @@ api.getUserInfo().then((userInfoApi) => {
     popupSelector: "popupCardDelete",
   }); // создала новый экземпляр класса обработчиа
 
-  // const renderCard = (item) => {
-  //   const card = new Card(item, ".card-template", (name, link) => {
-  //     modalWithImage.openImage(link, name)},);
-  //   return card.generateCard();
-  // };
+const submitDelete = new PopupWithDelete('popupCardDelete')
+
+
+
+
 
   const renderCard = (item) => {
     const card = new Card(
@@ -208,8 +208,10 @@ api.getUserInfo().then((userInfoApi) => {
             api
               .remLikeCard(idCard)
               .then((res) => {
+                const likesArray = res.likes
                 card.cardLikeToggle();
-                card.counterLikes(res.likes.length);
+                card.counterLikes(likesArray.length);
+               
               })
               .catch((err) => {
                 console.log(`Ошибка дизлайка ${err}`);
@@ -218,8 +220,9 @@ api.getUserInfo().then((userInfoApi) => {
             api
               .addLikeCard(idCard)
               .then((res) => {
+                const likesArray = res.likes
                 card.cardLikeToggle();
-                card.counterLikes(res.likes.length);
+                card.counterLikes(likesArray.length);
               })
               .catch((err) => {
                 console.log(`Ошибка лайка ${err}`);
@@ -227,21 +230,22 @@ api.getUserInfo().then((userInfoApi) => {
           }
         },
 
-        handleDeleteClick: (event) => {
+        handleDeleteClick: (item) => {
+
           const idCard = card.getCardId();
-          const cardElement = event.target.closest(".card");
-          popupDelCard.setEventListeners(() => {
-            api
-              .delInitialCards(idCard)
+          // const cardElement = event.target.closest(".card");
+
+          submitDelete.setSubmit(() => {
+            api.delInitialCards(idCard)
               .then(() => {
-                cardElement.remove();
-                popupDelCard.closePopup();
+                card.cardDelete();
+                submitDelete.closePopup();
               })
               .catch((err) => {
                 console.log(`Ошибка удаления изображения ${err}`);
               });
           });
-          popupDelCard.openPopup();
+          submitDelete.openPopup();
         },
       },
       ".card-template",
@@ -251,8 +255,5 @@ api.getUserInfo().then((userInfoApi) => {
     return card.generateCard();
   };
 
-  
-  //Отрисовывание карточек с сервера
-
-   
+     
 });
