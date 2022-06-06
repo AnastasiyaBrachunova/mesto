@@ -67,9 +67,12 @@ export default class Card {
     if (this.whoLikes()) {
       // если кто-то лайкнул то актив
       this._buttonLike.classList.add("button-like_active");
+      this.isLiked = true
     } else {
       // иначе убрать
       this._buttonLike.classList.remove("button-like_active");
+      this.isLiked = false
+
     }
   }
 
@@ -80,6 +83,7 @@ export default class Card {
 
   cardLikeToggle() {
     this._buttonLike.classList.toggle("button-like_active");
+    this.isLiked = !this.isLiked
   }
 
   _swithTrashCan() {

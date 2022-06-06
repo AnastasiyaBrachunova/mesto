@@ -203,7 +203,7 @@ const submitDelete = new PopupWithDelete('popupCardDelete')
         },
         handleLikeClick: () => {
           const idCard = card.getCardId();
-          if (card.whoLikes(card)) {
+          if (card.isLiked) {
             api
               .remLikeCard(idCard)
               .then((res) => {
