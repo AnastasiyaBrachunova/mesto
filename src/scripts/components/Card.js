@@ -4,7 +4,6 @@ export default class Card {
     cardSelector,
     userId
   ) {
-    console.log(data)
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;

@@ -20,7 +20,6 @@
         <div class="profile__overlay">
           <div class="profile__overlay-background"></div>
           <img src="<%=require('./images/editAvatar.svg')%>" class="profile__change-avatar">
-
         </div>
 
       </div>
@@ -106,11 +105,9 @@
       <button class="popup-close button" id="closeAvatar" type="button"></button>
       <form class="form" id="popupAvatar" name="avatar" novalidate>
         <h2 class="form__heading">Обновить аватар</h2>
-
-        <input class="form__input-container form__input-container_urlInfo" id="avatarLink" name="avatar" type="url"
-          autocomplete="off" placeholder="Ссылка на картинку" required />
-        <span id="urlInfo-error" class="form__input-error urlInfo-error"></span>
-
+        <input class="form__input-container form__input-container_urlInfo" id="urlInfo" name="avatar" type="url"
+        autocomplete="off" placeholder="Ссылка на аватар" required />
+      <span id="urlInfo-error" class="form__input-error urlInfo-error"></span>
         <button class="form__button-submit form__button-submit_avatar button" id="avatarUpdate " type="submit"
           value="Сохранить">Сохранить</button>
       </form>

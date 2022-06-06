@@ -13,34 +13,14 @@ export const userInfo = document.querySelector(
 export const cardsContainer = document.querySelector('.grid-gallery');
 export const formUserInfo = document.getElementById("formUserInfo");
 export const formTravel = document.getElementById("popUpTravel");
-
-export const photoArray = [
-  {
-    name: "Коста-Рика",
-    link: "https://breeze.ru/files/images/puerto-quepos_1.jpg",
-  },
-  {
-    name: "Греция",
-    link: "https://traveltimes.ru/wp-content/uploads/2021/06/greciya-vizy.jpg",
-  },
-  {
-    name: "Австралия",
-    link: "https://tranio.ru/articles/4389/aet12qktuul1.shutterstock_1094901527.jpg",
-  },
-  {
-    name: "Индия",
-    link: "https://img5.goodfon.ru/wallpaper/nbig/3/c1/indiia-tadzh-makhal-khram-dvorets-bashni-kupola-gazony-derev.jpg",
-  },
-  {
-    name: "Франция",
-    link: "https://a.d-cd.net/1f25g6s-1920.jpg",
-  },
-  {
-    name: "Рио-де-Жанейро",
-    link: "https://yeremenko.ua/mailer/file/brazil/rio/otdyh_v_brazilii_1.jpg",
-  },
-];
+export const formChangeAvatar = document.getElementById("avatarChange");
 
 
-
-
+export const formForValidation = {
+  formInput: ".form__input-container",
+  buttonElement: ".form__button-submit",
+  inactiveButtonClass: "form__button-submit_invalid",
+  inputErrorClass: 'form__input-container_error"',
+  errorClass: "form__input-error_active",
+  closeButton: ".popup-close",
+};

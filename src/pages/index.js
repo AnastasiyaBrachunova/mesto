@@ -14,7 +14,9 @@ import {
   userInfo,
   formUserInfo,
   formTravel,
+  formChangeAvatar,
   cardsContainer,
+  formForValidation,
 } from "../scripts/utils/constants.js";
 import { data } from "autoprefixer";
 
@@ -53,12 +55,28 @@ api.getUserInfo().then((userInfoApi) => {
 
   initialCardsPromise();
 
+
+  // ВКЛЮЧЕНИЕ ВАЛИДАЦИИ
+
+  const formUserInfoValidation = new FormValidator(formForValidation, formUserInfo);
+  formUserInfoValidation.enableValidation();
+
+  const formTravelValidation = new FormValidator(formForValidation, formTravel);
+  formTravelValidation.enableValidation();
+
+  const formChangeAvatarValidation = new FormValidator(formForValidation, formChangeAvatar);
+
+
+
+
+
   // получение информации о пользователе  пользователя с сервера
   inputUserInfo.setUserInfo({
     userName: userInfoApi.name,
     profInfo: userInfoApi.about,
     avatar: userInfoApi.avatar,
   });
+
 
   document.querySelector(".edit-button").addEventListener("click", () => {
     popupUserFormSubmit.openPopup();
@@ -68,12 +86,16 @@ api.getUserInfo().then((userInfoApi) => {
     popupTravelFormSubmit.openPopup();
   });
 
+  
+
+
   const modalWithImage = new PopupWithImage("zoomPic");
   modalWithImage.setEventListeners();
 
   document.querySelector(".profile__overlay").addEventListener("click", () => {
     const modalAvatarChange = new Popup("avatarChange");
     modalAvatarChange.openPopup();
+    formChangeAvatarValidation.enableValidation();
     modalAvatarChange.setEventListeners();
   }); // открытие модалки редактирования фотки
 
@@ -83,15 +105,21 @@ api.getUserInfo().then((userInfoApi) => {
   const popupUserFormSubmit = new PopupWithForm({
     popupSelector: "profilePopup",
     handleFormSubmit: (formData) => {
-      api
-        .setUserInfo(formData.userName, formData.profInfo)
+      popupUserFormSubmit.setLoader(true);
+      api.setUserInfo(formData.userName, formData.profInfo)
         .then((userInfoApi) => {
           inputUserInfo.setUserInfo({
             userName: userInfoApi.name,
             profInfo: userInfoApi.about,
             avatar: userInfoApi.avatar,
           });
-        });
+        })
+        .catch((err) => {
+          console.log(`Ошибка смены данных пользователя ${err}`);
+        })
+        .finally(() => {
+          popupUserFormSubmit.setLoader(false);
+        })
     },
   });
   popupUserFormSubmit.setEventListeners();
@@ -102,15 +130,21 @@ api.getUserInfo().then((userInfoApi) => {
   const popupChangeAvatar = new PopupWithForm({
     popupSelector: "avatarChange",
     handleFormSubmit: (formData) => {
+      popupChangeAvatar.setLoader(true);
       api.setUserAvatar(formData.avatar).then((userInfoApi) => {
-        console.log(userInfoApi);
         inputUserInfo.setUserInfo({
           userName: userInfoApi.name,
           profInfo: userInfoApi.about,
           avatar: userInfoApi.avatar,
-          id: userInfoApi._id
+          userId: userInfoApi._id
         });
-      });
+      })
+      .catch((err) => {
+        console.log(`Ошибка смены аватара ${err}`);
+      })
+      .finally(() => {
+        popupChangeAvatar.setLoader(false);
+      })
     },
   });
   popupChangeAvatar.setEventListeners();
@@ -128,12 +162,19 @@ api.getUserInfo().then((userInfoApi) => {
   const popupTravelFormSubmit = new PopupWithForm({
     popupSelector: "trawelInfo",
     handleFormSubmit: (formData) => {
+      popupTravelFormSubmit.setLoader(true);
       api.setInitialCard(formData.name, formData.link).then((res) => {
         if (res) {
           cardsContainer.innerHTML = "";
           initialCardsPromise();
         }
-      });
+      })
+      .catch((err) => {
+        console.log(`Ошибка загрузки изображения ${err}`);
+      })
+      .finally(() => {
+        popupTravelFormSubmit.setLoader(false);
+      })
     },
   });
   popupTravelFormSubmit.setEventListeners();
@@ -204,32 +245,14 @@ api.getUserInfo().then((userInfoApi) => {
         },
       },
       ".card-template",
-      inputUserInfo.getUserInfo().id
+      userInfoApi._id
     );
+
     return card.generateCard();
   };
 
   
   //Отрисовывание карточек с сервера
 
-  // ВКЛЮЧЕНИЕ ВАЛИДАЦИИ
-
-  const formForValidation = {
-    formInput: ".form__input-container",
-    buttonElement: ".form__button-submit",
-    inactiveButtonClass: "form__button-submit_invalid",
-    inputErrorClass: 'form__input-container_error"',
-    errorClass: "form__input-error_active",
-    closeButton: ".popup-close",
-  };
-
-  const formUserInfoValidation = new FormValidator(
-    formForValidation,
-    formUserInfo
-  );
-
-  formUserInfoValidation.enableValidation();
-  const formTravelValidation = new FormValidator(formForValidation, formTravel);
-
-  formTravelValidation.enableValidation();
+   
 });

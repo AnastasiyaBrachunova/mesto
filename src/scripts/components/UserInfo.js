@@ -11,15 +11,12 @@ export default class UserInfo {
       userName: this._userName.textContent,
       profInfo: this._userJob.textContent,
       avatar: this._userAvatar.src,
-      id: this._userId
     };
   }
 
-  setUserInfo({ userName, profInfo, avatar, _id }) {
+  setUserInfo({ userName, profInfo, avatar, id }) {
     this._userName.textContent = userName;
     this._userJob.textContent = profInfo;
     this._userAvatar.src = avatar;
-    this._userId = _id;
-    console.log(this._userId)
   }
 }
