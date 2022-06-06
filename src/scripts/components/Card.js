@@ -51,8 +51,7 @@ export default class Card {
   }
 
   whoLikes(like) {
-    // получаем количество лайков
-    // console.log(like)
+
     return this._likes.some((like) => like._id === this._userId)
   }
 

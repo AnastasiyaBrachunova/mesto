@@ -6,15 +6,15 @@ export default class PopupWithDelete extends Popup {
   }
 
   setSubmit(handleFormSubmit) {
-    this._handler = handleFormSubmit;
+    this._handleFormSubmit = handleFormSubmit;
   }
 
   setEventListeners() {
+    super.setEventListeners();
 
     this._popupForm.addEventListener("submit", (event) => {
-      super.setEventListeners();
-      evt.preventDefault();
-      this._handler(event);
+      event.preventDefault();
+      this._handleFormSubmit(event);
     });
 
     document.addEventListener("keydown", (event) => {

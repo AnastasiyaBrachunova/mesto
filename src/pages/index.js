@@ -189,6 +189,7 @@ api.getUserInfo().then((userInfoApi) => {
   }); // создала новый экземпляр класса обработчиа
 
 const submitDelete = new PopupWithDelete('popupCardDelete')
+submitDelete.setEventListeners();
 
 
 
@@ -232,9 +233,9 @@ const submitDelete = new PopupWithDelete('popupCardDelete')
         handleDeleteClick: (event) => {
 
           const idCard = card.getCardId();
-          // const cardElement = event.target.closest(".card");
-
-          submitDelete.setSubmit(() => {
+          submitDelete.setSubmit((event) => {
+            event.preventDefault();
+            popupDelCard.setLoader(true);
             api.delInitialCards(idCard)
               .then(() => {
                 card.cardDelete();
@@ -242,7 +243,10 @@ const submitDelete = new PopupWithDelete('popupCardDelete')
               })
               .catch((err) => {
                 console.log(`Ошибка удаления изображения ${err}`);
-              });
+              })
+              .finally(() => {
+                popupDelCard.setLoader(false);
+              })
           });
           submitDelete.openPopup();
         },
