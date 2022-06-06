@@ -4,11 +4,11 @@ export default class Card {
     cardSelector,
     userId
   ) {
-    console.log(data)  // объект с лайками приходит
+    console.log(data); // объект с лайками приходит
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
-    this._id = data.id;
+    this._id = data._id;
     this._owner = data.owner;
     this._userId = userId;
     this._cardSelector = cardSelector;
@@ -35,11 +35,11 @@ export default class Card {
     this._picture.src = this._link; // присвоили ссылку
     this._picture.alt = this._name; // присвоили значение в альт для большой картинки
     this._element.querySelector(".card__caption").textContent = this._name; // присвоили имя  картинки для карточки
-    this._likeСounter.textContent = this.likes.length; // присвоили значение счетчика его длину из сервера
+    this._likeСounter.textContent = this._likes.length; // присвоили значение счетчика его длину из сервера
 
     this._buttonLike = this._element.querySelector(".button-like"); // нашли кнопку лайка
     this._trashCanButton = this._element.querySelector(".card__delete"); // нашли кнопку корзины
-    this._switchLike();  // запустили переключатель состояния лайка
+    this._switchLike(); // запустили переключатель состояния лайка
     this._swithTrashCan(); // запустили переключатель корзины
     this._setEventListeners(); // запустили слушатели
 
@@ -53,7 +53,7 @@ export default class Card {
 
   whoLikes(item) {
     // получаем количество лайков
-    return this.likes.some((item) => {
+    return this._likes.some((item) => {
       return item._id === this._userId;
     });
   }
