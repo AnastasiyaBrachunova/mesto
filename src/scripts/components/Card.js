@@ -78,6 +78,7 @@ export default class Card {
   counterLikes(likesLength) {
     // записали значение счетчика
     this._likeСounter.textContent = likesLength;
+
   }
 
   cardLikeToggle() {

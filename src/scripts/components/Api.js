@@ -15,6 +15,10 @@ export default class Api {
       .catch((err) =>
         console.log("Ошибка" , err));
     }
+
+    getAllData() {
+      return Promise.all([this.getUserInfo(), this.getInitialCards()]);
+    }
   
     getInitialCards() {
       return this._fetch(`/cards`);

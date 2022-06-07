@@ -15,7 +15,5 @@ export default class Section {
     this._container.append(item);
   }
 
-  deleteItem(item) {
-    th
-  }
 }
+

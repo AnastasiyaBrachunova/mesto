@@ -4,11 +4,11 @@ import Popup from "./Popup.js";
 export default class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
-    this._captureModalPic = document.querySelector(".popup__capture");
+    this._captureModalPic = this.popup.querySelector(".popup__capture");
     this._imageModalPic = document.querySelector(".popup__zoom-pic");
   }
 
-  openImage(src, alt) {
+  openPopup(src, alt) {
     super.openPopup();
     this._captureModalPic.textContent = alt;
     this._imageModalPic.src = src;
