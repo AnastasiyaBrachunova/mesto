@@ -57,49 +57,29 @@ const modalSubmitDelete = new PopupWithDelete('.popup_cardDelete')
   formChangeAvatarValidation.enableValidation();
 ///////////////////////////////////////////////////////////
 
+
+
 api.getUserInfo().then((userInfoApi) => {
 
+
+  const cardList = new Section(
+    {
+      renderer: (item) => {
+        // функция для отрисоки 1 элемента называется renderer
+        const card = renderCard(item); // переиспользовали функцию создания карточки
+        cardList.addItem(card); // вставили в разметку с помощью имеющегося метода класса Section
+      },
+    },
+    ".grid-gallery"
+  );
+
   const initialCardsPromise = () =>
-    api.getInitialCards().then((cardsApi) => {
-      const cardList = new Section(
-        {
-          items: cardsApi,
-          renderer: (item) => {
-            // функция для отрисоки 1 элемента называется renderer
-            const card = renderCard(item); // переиспользовали функцию создания карточки
-            cardList.addItem(card); // вставили в разметку с помощью имеющегося метода класса Section
-          },
-        },
-        ".grid-gallery"
-      );
-      cardList.renderItems();
-    });
+    api.getInitialCards().then((cardArray) => {
+   
+      cardList.renderItems(cardArray);
+    });  
 
-  initialCardsPromise();
-
-  
-  Promise.all([api.getUserInfo(), api.getInitialCards()]) 
-  .then(([userInfoApi, initialCards])=>{    //попадаем сюда, когда оба промиса будут выполнены, деструктурируем ответ
-    api.getInitialCards().then((cardsApi) => {   //все данные получены, отрисовываем страницу 
-      const cardList = new Section(
-        {
-          items: cardsApi,
-          renderer: (item) => {
-            // функция для отрисоки 1 элемента называется renderer
-            const card = renderCard(item); // переиспользовали функцию создания карточки
-            cardList.addItem(card); // вставили в разметку с помощью имеющегося метода класса Section
-          },
-        },
-        ".grid-gallery"
-      );
-      cardList.renderItems();
-    });              
-  }) 
-  .catch((err)=>{             //попадаем сюда если один из промисов завершится ошибкой 
-  console.log(`Ошибка получения данных с сервера ${err}`);
-   })
-  
-
+  initialCardsPromise(cardList);
 
     const popupTravelFormSubmit = new PopupWithForm({
       popupSelector: ".popup_trawel",
