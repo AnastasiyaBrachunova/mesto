@@ -19,7 +19,7 @@ import {
   formForValidation,
   userEditButton,
   travelAddButton,
-  avatarButton
+  avatarButton,
 } from "../scripts/utils/constants.js";
 
 //***********СОЗДАНИЕ ЭКЗЕМПЛЯРОВ КЛАССОВ ****************/
@@ -32,9 +32,15 @@ const api = new Api({
   },
 });
 
-const formUserInfoValidation = new FormValidator(formForValidation, formUserInfo);
+const formUserInfoValidation = new FormValidator(
+  formForValidation,
+  formUserInfo
+);
 const formTravelValidation = new FormValidator(formForValidation, formTravel);
-const formChangeAvatarValidation = new FormValidator(formForValidation, formChangeAvatar);
+const formChangeAvatarValidation = new FormValidator(
+  formForValidation,
+  formChangeAvatar
+);
 
 const inputUserInfo = new UserInfo({
   userNameSelector: ".profile__name",
@@ -48,20 +54,16 @@ const popupDelCard = new PopupWithForm({
   popupSelector: ".popup_cardDelete",
 }); // создала новый экземпляр класса обработчиа
 
-const modalSubmitDelete = new PopupWithDelete('.popup_cardDelete')
+const modalSubmitDelete = new PopupWithDelete(".popup_cardDelete");
 
-  //******ВКЛЮЧЕНИЕ ВАЛИДАЦИИ *********/ 
+//******ВКЛЮЧЕНИЕ ВАЛИДАЦИИ *********/
 
-  formUserInfoValidation.enableValidation();
-  formTravelValidation.enableValidation();
-  formChangeAvatarValidation.enableValidation();
+formUserInfoValidation.enableValidation();
+formTravelValidation.enableValidation();
+formChangeAvatarValidation.enableValidation();
 ///////////////////////////////////////////////////////////
 
-
-
 api.getUserInfo().then((userInfoApi) => {
-
-
   const cardList = new Section(
     {
       renderer: (item) => {
@@ -75,39 +77,43 @@ api.getUserInfo().then((userInfoApi) => {
 
   const initialCardsPromise = () =>
     api.getInitialCards().then((cardArray) => {
-   
       cardList.renderItems(cardArray);
-    });  
+    });
 
-  initialCardsPromise(cardList);
+  Promise.all([   //в Promise.all передаем массив промисов которые нужно выполнить
+    api.getUserInfo(),
+    api.getInitialCards(),
+  ])
+    .then(([userInfoApi, initialCards]) => {//попадаем сюда, когда оба промиса будут выполнены, деструктурируем ответ 
+      initialCardsPromise(cardList); //все данные получены, отрисовываем страницу
+    })
+    .catch((err) => {       //попадаем сюда если один из промисов завершится ошибкой
+      console.log(`Ошибка запроса данных с сервера ${err}`);
+    });
 
-    const popupTravelFormSubmit = new PopupWithForm({
-      popupSelector: ".popup_trawel",
-      handleFormSubmit: (formData) => {
-        popupTravelFormSubmit.setLoader(true);
-        api.setInitialCard(formData.name, formData.link).then((res) => {
+  const popupTravelFormSubmit = new PopupWithForm({
+    popupSelector: ".popup_trawel",
+    handleFormSubmit: (formData) => {
+      popupTravelFormSubmit.setLoader(true);
+      api
+        .setInitialCard(formData.name, formData.link)
+        .then((res) => {
           if (res) {
             cardsContainer.innerHTML = "";
             initialCardsPromise();
-          };
+          }
           popupTravelFormSubmit.closePopup();
-  
         })
         .catch((err) => {
           console.log(`Ошибка загрузки изображения ${err}`);
         })
         .finally(() => {
           popupTravelFormSubmit.setLoader(false);
-        })
-      },
-    });
+        });
+    },
+  });
 
-
-
-
-
-///////////////////////////////////////////////////////
-
+  ///////////////////////////////////////////////////////
 
   // получение информации о пользователе  пользователя с сервера
   inputUserInfo.setUserInfo({
@@ -116,9 +122,6 @@ api.getUserInfo().then((userInfoApi) => {
     avatar: userInfoApi.avatar,
   });
 
-
-
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////////
   /*---Установка слушателя на сабмит, получение данных из инпутов смена ифно пользователя--*/
   //
@@ -126,7 +129,8 @@ api.getUserInfo().then((userInfoApi) => {
     popupSelector: ".popup_profile",
     handleFormSubmit: (formData) => {
       popupUserFormSubmit.setLoader(true);
-      api.setUserInfo(formData.userName, formData.profInfo)
+      api
+        .setUserInfo(formData.userName, formData.profInfo)
         .then((userInfoApi) => {
           inputUserInfo.setUserInfo({
             userName: userInfoApi.name,
@@ -140,38 +144,37 @@ api.getUserInfo().then((userInfoApi) => {
         })
         .finally(() => {
           popupUserFormSubmit.setLoader(false);
-        })
+        });
     },
   });
   /////////////////////////////////////////////////////////////////////////////////
 
-    // смена аватарки
+  // смена аватарки
   const popupChangeAvatar = new PopupWithForm({
     popupSelector: ".popup_avatarChange",
     handleFormSubmit: (formData) => {
       popupChangeAvatar.setLoader(true);
-      api.setUserAvatar(formData.avatar).then((userInfoApi) => {
-        inputUserInfo.setUserInfo({
-          userName: userInfoApi.name,
-          profInfo: userInfoApi.about,
-          avatar: userInfoApi.avatar,
-          userId: userInfoApi._id
+      api
+        .setUserAvatar(formData.avatar)
+        .then((userInfoApi) => {
+          inputUserInfo.setUserInfo({
+            userName: userInfoApi.name,
+            profInfo: userInfoApi.about,
+            avatar: userInfoApi.avatar,
+            userId: userInfoApi._id,
+          });
+          popupChangeAvatar.closePopup();
+        })
+        .catch((err) => {
+          console.log(`Ошибка смены аватара ${err}`);
+        })
+        .finally(() => {
+          popupChangeAvatar.setLoader(false);
         });
-        popupChangeAvatar.closePopup();
-      })
-      .catch((err) => {
-        console.log(`Ошибка смены аватара ${err}`);
-      })
-      .finally(() => {
-        popupChangeAvatar.setLoader(false);
-      })
     },
   });
 
-
   /////////////////////////////////////////////////////////////////
-
-
 
   const renderCard = (item) => {
     const card = new Card(
@@ -186,10 +189,9 @@ api.getUserInfo().then((userInfoApi) => {
             api
               .remLikeCard(idCard)
               .then((res) => {
-                const likesArray = res.likes
+                const likesArray = res.likes;
                 card.cardLikeToggle();
                 card.counterLikes(likesArray.length);
-               
               })
               .catch((err) => {
                 console.log(`Ошибка дизлайка ${err}`);
@@ -198,7 +200,7 @@ api.getUserInfo().then((userInfoApi) => {
             api
               .addLikeCard(idCard)
               .then((res) => {
-                const likesArray = res.likes
+                const likesArray = res.likes;
                 card.cardLikeToggle();
                 card.counterLikes(likesArray.length);
               })
@@ -209,12 +211,12 @@ api.getUserInfo().then((userInfoApi) => {
         },
 
         handleDeleteClick: (event) => {
-
           const idCard = card.getCardId();
           modalSubmitDelete.setSubmit((event) => {
-            event.preventDefault();
+            // event.preventDefault();
             popupDelCard.setLoader(true);
-            api.delInitialCards(idCard)
+            api
+              .delInitialCards(idCard)
               .then(() => {
                 card.cardDelete();
                 modalSubmitDelete.closePopup();
@@ -224,7 +226,7 @@ api.getUserInfo().then((userInfoApi) => {
               })
               .finally(() => {
                 popupDelCard.setLoader(false);
-              })
+              });
           });
           modalSubmitDelete.openPopup();
         },
@@ -235,7 +237,7 @@ api.getUserInfo().then((userInfoApi) => {
 
     return card.generateCard();
   };
-//*************** УСТАНОВКА СЛУШАТЕЛЕЙ  *****************/
+  //*************** УСТАНОВКА СЛУШАТЕЛЕЙ  *****************/
 
   userEditButton.addEventListener("click", () => {
     popupUserFormSubmit.openPopup();
@@ -247,7 +249,7 @@ api.getUserInfo().then((userInfoApi) => {
 
   avatarButton.addEventListener("click", () => {
     popupChangeAvatar.openPopup();
-  }); 
+  });
 
   openModalTravelButton.addEventListener("click", () => {
     formTravel.reset();
@@ -257,22 +259,16 @@ api.getUserInfo().then((userInfoApi) => {
 
   openModalUserButton.addEventListener("click", () => {
     const getUserInfo = inputUserInfo.getUserInfo();
-    console.log(getUserInfo)
+    console.log(getUserInfo);
     formUserInfoValidation.resetForm();
     formUserInfoValidation.enableSubmitButton();
     userName.value = getUserInfo.userName;
     userInfo.value = getUserInfo.profInfo;
   });
 
-
   modalWithImage.setEventListeners();
   popupUserFormSubmit.setEventListeners();
   popupChangeAvatar.setEventListeners();
   popupTravelFormSubmit.setEventListeners();
   modalSubmitDelete.setEventListeners();
-
-
-
-
-     
 });
