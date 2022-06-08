@@ -80,14 +80,17 @@ api.getUserInfo().then((userInfoApi) => {
       cardList.renderItems(cardArray);
     });
 
-  Promise.all([   //в Promise.all передаем массив промисов которые нужно выполнить
+  Promise.all([
+    //в Promise.all передаем массив промисов которые нужно выполнить
     api.getUserInfo(),
     api.getInitialCards(),
   ])
-    .then(([userInfoApi, initialCards]) => {//попадаем сюда, когда оба промиса будут выполнены, деструктурируем ответ 
+    .then(([userInfoApi, initialCards]) => {
+      //попадаем сюда, когда оба промиса будут выполнены, деструктурируем ответ
       initialCardsPromise(cardList); //все данные получены, отрисовываем страницу
     })
-    .catch((err) => {       //попадаем сюда если один из промисов завершится ошибкой
+    .catch((err) => {
+      //попадаем сюда если один из промисов завершится ошибкой
       console.log(`Ошибка запроса данных с сервера ${err}`);
     });
 
@@ -98,15 +101,16 @@ api.getUserInfo().then((userInfoApi) => {
       api
         .setInitialCard(formData.name, formData.link)
         .then((res) => {
-         cardList.addItem(res)
+          const card = renderCard(res);
+          cardsContainer.prepend(card);
           popupTravelFormSubmit.closePopup();
         })
         .catch((err) => {
           console.log(`Ошибка загрузки изображения ${err}`);
-        })
-        .finally(() => {
-          popupTravelFormSubmit.setLoader(false);
         });
+      // .finally(() => {
+      //   popupTravelFormSubmit.setLoader(false);
+      // });
     },
   });
 
