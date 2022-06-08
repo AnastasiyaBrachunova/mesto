@@ -1,17 +1,18 @@
 export default class Api {
-    constructor(config) {
-      this.headers = config.headers;
-      this.url = config.url;
-    }
+  constructor(config) {
+    this.headers = config.headers;
+    this.url = config.url;
+  }
 
-    _fetch(url, opt={}) {      
-      return fetch(this.url+url,{headers: this.headers, ...opt})
+  _fetch(url, opt = {}) {
+    return fetch(this.url + url, { headers: this.headers, ...opt })
       .then((res) => {
         if (res.ok) {
           return res.json();
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       })
+<<<<<<< HEAD
       .catch((err) =>
         console.log("Ошибка" , err));
     }
@@ -37,57 +38,76 @@ getAppInfo() {
     getInitialCards() {
       return this._fetch(`/cards`);
     }
+=======
+      .catch((err) => console.log("Ошибка", err));
+  }
+>>>>>>> 13beafcb2e14876ed1baf352c8170de59d578c45
 
-    getUserInfo() {
-      return this._fetch(`/users/me`);
-    }
+  setInitialCard(name, link) {
+    return this._fetch(`/cards`, {
+      method: `POST`,
+      body: JSON.stringify({
+        name: name,
+        link: link,
+      }),
+    });
+  }
 
-    setUserInfo(name, about) {
-      return this._fetch(`/users/me`, {
-        method: `PATCH`,
-        body: JSON.stringify({
-          name: name,
-          about: about,
-        })
-      });
-    }
+  getAllData() {
+    return Promise.all([this.getUserInfo(), this.getInitialCards()]);
+  }
 
-    setUserAvatar(avatar) {
-      return this._fetch(`/users/me/avatar`, {
-        method: `PATCH`,
-        body: JSON.stringify({
-          avatar: avatar
-        })
-      });
-    }
+  getInitialCards() {
+    return this._fetch(`/cards`);
+  }
 
+  getUserInfo() {
+    return this._fetch(`/users/me`);
+  }
 
+  setUserInfo(name, about) {
+    return this._fetch(`/users/me`, {
+      method: `PATCH`,
+      body: JSON.stringify({
+        name: name,
+        about: about,
+      }),
+    });
+  }
 
-    delInitialCards(del) {
-      return this._fetch(`/cards/${del}`, {
-        method: `DELETE`,
-        body: JSON.stringify({
-          _id: del 
-        })
-      });
-    }
+  setUserAvatar(avatar) {
+    return this._fetch(`/users/me/avatar`, {
+      method: `PATCH`,
+      body: JSON.stringify({
+        avatar: avatar,
+      }),
+    });
+  }
 
-    addLikeCard(addlike) {
-      return this._fetch(`/cards/likes/${addlike}`, {
-        method: `PUT`,
-        body: JSON.stringify({
-          _id: addlike 
-        })
-      });
-    }
+  delInitialCards(del) {
+    return this._fetch(`/cards/${del}`, {
+      method: `DELETE`,
+      body: JSON.stringify({
+        _id: del,
+      }),
+    });
+  }
 
-    remLikeCard(remlike) {
-      return this._fetch(`/cards/likes/${remlike}`, {
-        method: `DELETE`,
-        body: JSON.stringify({
-          _id: remlike 
-        })
-      });
-    }
+  addLikeCard(addlike) {
+    return this._fetch(`/cards/likes/${addlike}`, {
+      method: `PUT`,
+      body: JSON.stringify({
+        _id: addlike,
+      }),
+    });
+  }
 
+  remLikeCard(remlike) {
+    return this._fetch(`/cards/likes/${remlike}`, {
+      method: `DELETE`,
+      body: JSON.stringify({
+        _id: remlike,
+      }),
+    });
+  }
 }
