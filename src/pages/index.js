@@ -77,8 +77,7 @@ const cardList = new Section(
 
 api.getAppInfo()
   .then(([ cardArray, userData ]) => {
-    const userInfo = new UserInfo(userData);
-    userInfo.setUserInfo();
+
     userId = userData._id;
     cardList.renderItems(cardArray)
 })
@@ -196,11 +195,11 @@ api.getUserInfo().then((userInfoApi) => {
       api
         .setUserInfo(formData.userName, formData.profInfo)
         .then((userInfoApi) => {
-          // inputUserInfo.setUserInfo({
-          //   userName: userInfoApi.name,
-          //   profInfo: userInfoApi.about,
-          //   avatar: userInfoApi.avatar,
-          // });
+          inputUserInfo.setUserInfo({
+            userName: userInfoApi.name,
+            profInfo: userInfoApi.about,
+            avatar: userInfoApi.avatar,
+          });
           popupUserFormSubmit.closePopup();
         })
         .catch((err) => {
@@ -219,12 +218,12 @@ api.getUserInfo().then((userInfoApi) => {
       api
         .setUserAvatar(formData.avatar)
         .then((userInfoApi) => {
-          // inputUserInfo.setUserInfo({
-          //   name: userInfoApi.name,
-          //   about: userInfoApi.about,
-          //   avatar: userInfoApi.avatar,
-          //   // userId: userInfoApi._id,
-          // });
+          inputUserInfo.setUserInfo({
+            userName: userInfoApi.name,
+            profInfo: userInfoApi.about,
+            avatar: userInfoApi.avatar,
+            // userId: userInfoApi._id,
+          });
           popupChangeAvatar.closePopup();
         })
         .catch((err) => {

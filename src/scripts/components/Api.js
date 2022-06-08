@@ -12,7 +12,6 @@ export default class Api {
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-<<<<<<< HEAD
       .catch((err) =>
         console.log("Ошибка" , err));
     }
@@ -38,10 +37,6 @@ getAppInfo() {
     getInitialCards() {
       return this._fetch(`/cards`);
     }
-=======
-      .catch((err) => console.log("Ошибка", err));
-  }
->>>>>>> 13beafcb2e14876ed1baf352c8170de59d578c45
 
   setInitialCard(name, link) {
     return this._fetch(`/cards`, {
