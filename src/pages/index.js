@@ -69,7 +69,7 @@ const cardList = new Section(
     renderer: (item) => {
       // функция для отрисоки 1 элемента называется renderer
       const card = renderCard(item); // переиспользовали функцию создания карточки
-      cardList.addItem(card); // вставили в разметку с помощью имеющегося метода класса Section
+      cardList.addItem(card, "after"); // вставили в разметку с помощью имеющегося метода класса Section
     },
   },
   ".grid-gallery"
@@ -170,7 +170,8 @@ api.getUserInfo().then((userInfoApi) => {
       api
         .setInitialCard(formData.name, formData.link)
         .then((res) => {
-          cardList.addItem(res);
+          const card = renderCard(res); // переиспользовали функцию создания карточки
+      cardList.addItem(card);
           popupTravelFormSubmit.closePopup();
         })
         .catch((err) => {
