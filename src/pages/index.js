@@ -22,6 +22,8 @@ import {
   avatarButton,
 } from "../scripts/utils/constants.js";
 
+
+
 //***********СОЗДАНИЕ ЭКЗЕМПЛЯРОВ КЛАССОВ ****************/
 
 const api = new Api({
@@ -62,6 +64,8 @@ formUserInfoValidation.enableValidation();
 formTravelValidation.enableValidation();
 formChangeAvatarValidation.enableValidation();
 ///////////////////////////////////////////////////////////
+
+
 let userId = null;
 
 const cardList = new Section(
@@ -142,6 +146,76 @@ function renderCard (item) {
   );
   return card.generateCard();
 };
+
+const popupTravelFormSubmit = new PopupWithForm({
+  popupSelector: ".popup_trawel",
+  handleFormSubmit: (formData) => {
+    popupTravelFormSubmit.setLoader(true);
+    api
+      .setInitialCard(formData.name, formData.link)
+      .then((res) => {
+        const card = renderCard(res); // переиспользовали функцию создания карточки
+    cardList.addItem(card);
+        popupTravelFormSubmit.closePopup();
+      })
+      .catch((err) => {
+        console.log(`Ошибка загрузки изображения ${err}`);
+      })
+      .finally(() => {
+        popupTravelFormSubmit.setLoader(false);
+      });
+  },
+});
+
+const popupUserFormSubmit = new PopupWithForm({
+  popupSelector: ".popup_profile",
+  handleFormSubmit: (formData) => {
+    popupUserFormSubmit.setLoader(true);
+    api
+      .setUserInfo(formData.userName, formData.profInfo)
+      .then((userInfoApi) => {
+        inputUserInfo.setUserInfo({
+          userName: userInfoApi.name,
+          profInfo: userInfoApi.about,
+          avatar: userInfoApi.avatar,
+        });
+        popupUserFormSubmit.closePopup();
+      })
+      .catch((err) => {
+        console.log(`Ошибка смены данных пользователя ${err}`);
+      })
+      .finally(() => {
+        popupUserFormSubmit.setLoader(false);
+      });
+  },
+});
+
+const popupChangeAvatar = new PopupWithForm({
+  popupSelector: ".popup_avatarChange",
+  handleFormSubmit: (formData) => {
+    popupChangeAvatar.setLoader(true);
+    api
+      .setUserAvatar(formData.avatar)
+      .then((userInfoApi) => {
+        inputUserInfo.setUserInfo({
+          userName: userInfoApi.name,
+          profInfo: userInfoApi.about,
+          avatar: userInfoApi.avatar,
+          // userId: userInfoApi._id,
+        });
+        popupChangeAvatar.closePopup();
+      })
+      .catch((err) => {
+        console.log(`Ошибка смены аватара ${err}`);
+      })
+      .finally(() => {
+        popupChangeAvatar.setLoader(false);
+      });
+  },
+});
+
+
+
 api.getUserInfo().then((userInfoApi) => {
   
   const initialCardsPromise = () =>
@@ -149,12 +223,8 @@ api.getUserInfo().then((userInfoApi) => {
       cardList.renderItems(cardArray);
     });
 
-  Promise.all([
-    //в Promise.all передаем массив промисов которые нужно выполнить
-    api.getUserInfo(),
-    api.getInitialCards(),
-  ])
-    .then(([userInfoApi, initialCards]) => {
+ api.getAllData()
+    .then(() => {
       //попадаем сюда, когда оба промиса будут выполнены, деструктурируем ответ
       initialCardsPromise(cardList); //все данные получены, отрисовываем страницу
     })
@@ -163,80 +233,14 @@ api.getUserInfo().then((userInfoApi) => {
       console.log(`Ошибка запроса данных с сервера ${err}`);
     });
 
-  const popupTravelFormSubmit = new PopupWithForm({
-    popupSelector: ".popup_trawel",
-    handleFormSubmit: (formData) => {
-      popupTravelFormSubmit.setLoader(true);
-      api
-        .setInitialCard(formData.name, formData.link)
-        .then((res) => {
-          const card = renderCard(res); // переиспользовали функцию создания карточки
-      cardList.addItem(card);
-          popupTravelFormSubmit.closePopup();
-        })
-        .catch((err) => {
-          console.log(`Ошибка загрузки изображения ${err}`);
-        })
-        .finally(() => {
-          popupTravelFormSubmit.setLoader(false);
-        });
-    },
-  });
-
   inputUserInfo.setUserInfo({
     userName: userInfoApi.name,
     profInfo: userInfoApi.about,
     avatar: userInfoApi.avatar,
   });
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const popupUserFormSubmit = new PopupWithForm({
-    popupSelector: ".popup_profile",
-    handleFormSubmit: (formData) => {
-      popupUserFormSubmit.setLoader(true);
-      api
-        .setUserInfo(formData.userName, formData.profInfo)
-        .then((userInfoApi) => {
-          inputUserInfo.setUserInfo({
-            userName: userInfoApi.name,
-            profInfo: userInfoApi.about,
-            avatar: userInfoApi.avatar,
-          });
-          popupUserFormSubmit.closePopup();
-        })
-        .catch((err) => {
-          console.log(`Ошибка смены данных пользователя ${err}`);
-        })
-        .finally(() => {
-          popupUserFormSubmit.setLoader(false);
-        });
-    },
-  });
-  /////////////////////////////////////////////////////////////////////////////////
-  const popupChangeAvatar = new PopupWithForm({
-    popupSelector: ".popup_avatarChange",
-    handleFormSubmit: (formData) => {
-      popupChangeAvatar.setLoader(true);
-      api
-        .setUserAvatar(formData.avatar)
-        .then((userInfoApi) => {
-          inputUserInfo.setUserInfo({
-            userName: userInfoApi.name,
-            profInfo: userInfoApi.about,
-            avatar: userInfoApi.avatar,
-            // userId: userInfoApi._id,
-          });
-          popupChangeAvatar.closePopup();
-        })
-        .catch((err) => {
-          console.log(`Ошибка смены аватара ${err}`);
-        })
-        .finally(() => {
-          popupChangeAvatar.setLoader(false);
-        });
-    },
-  });
-  /////////////////////////////////////////////////////////////////
  
+});
+
   //*************** УСТАНОВКА СЛУШАТЕЛЕЙ  *****************/
   userEditButton.addEventListener("click", () => {
     popupUserFormSubmit.openPopup();
@@ -258,7 +262,6 @@ api.getUserInfo().then((userInfoApi) => {
 
   openModalUserButton.addEventListener("click", () => {
     const getUserInfo = inputUserInfo.getUserInfo();
-    console.log(getUserInfo);
     formUserInfoValidation.resetForm();
     formUserInfoValidation.enableSubmitButton();
     userName.value = getUserInfo.userName;
@@ -269,4 +272,4 @@ api.getUserInfo().then((userInfoApi) => {
   popupChangeAvatar.setEventListeners();
   popupTravelFormSubmit.setEventListeners();
   modalSubmitDelete.setEventListeners();
-});
+
