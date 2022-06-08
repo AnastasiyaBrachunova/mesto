@@ -12,32 +12,30 @@ export default class Api {
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-      .catch((err) =>
-        console.log("Ошибка" , err));
-    }
-
-    setInitialCard(name, link) {
-      return this._fetch(`/cards`, {
-        method: `POST`,
-        body: JSON.stringify({
-          name: name,
-          link: link
-        })
-      })
-      .then((res) => {
-        if (res.ok) {
-          return Promise.resolve(res.json());
-        }
-      })
-    }
-    
-getAppInfo() {
-    return Promise.all([this.getInitialCards(), this.getUserInfo()]);
+      .catch((err) => console.log("Ошибка", err));
   }
 
-    getInitialCards() {
-      return this._fetch(`/cards`);
-    }
+  setInitialCard(name, link) {
+    return this._fetch(`/cards`, {
+      method: `POST`,
+      body: JSON.stringify({
+        name: name,
+        link: link,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        return Promise.resolve(res.json());
+      }
+    });
+  }
+
+  getAllData() {
+    return Promise.all([this.getUserInfo(), this.getInitialCards()]);
+  }
+
+  getInitialCards() {
+    return this._fetch(`/cards`);
+  }
 
   setInitialCard(name, link) {
     return this._fetch(`/cards`, {
@@ -47,10 +45,6 @@ getAppInfo() {
         link: link,
       }),
     });
-  }
-
-  getAllData() {
-    return Promise.all([this.getUserInfo(), this.getInitialCards()]);
   }
 
   getInitialCards() {

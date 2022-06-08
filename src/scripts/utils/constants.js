@@ -10,8 +10,7 @@ export const userInfo = document.querySelector(
   ".form__input-container_prof-info"
 );
 
-export const userEditButton = document.querySelector(".edit-button");
-export const travelAddButton = document.querySelector(".add-button");
+
 export const avatarButton = document.querySelector(".profile__overlay");
 
 export const cardsContainer = document.querySelector('.grid-gallery');

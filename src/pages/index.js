@@ -15,10 +15,7 @@ import {
   formUserInfo,
   formTravel,
   formChangeAvatar,
-  cardsContainer,
   formForValidation,
-  userEditButton,
-  travelAddButton,
   avatarButton,
 } from "../scripts/utils/constants.js";
 
@@ -79,8 +76,8 @@ const cardList = new Section(
   ".grid-gallery"
 );
 
-api.getAppInfo()
-  .then(([ cardArray, userData ]) => {
+api.getAllData()
+  .then(([ userData, cardArray ]) => {
 
     userId = userData._id;
     cardList.renderItems(cardArray)
@@ -242,20 +239,18 @@ api.getUserInfo().then((userInfoApi) => {
 });
 
   //*************** УСТАНОВКА СЛУШАТЕЛЕЙ  *****************/
-  userEditButton.addEventListener("click", () => {
-    popupUserFormSubmit.openPopup();
-  });
 
-  travelAddButton.addEventListener("click", () => {
+  openModalTravelButton.addEventListener("click", () => {
     popupTravelFormSubmit.openPopup();
   });
 
   avatarButton.addEventListener("click", () => {
+    formChangeAvatarValidation.resetForm();
+    formChangeAvatarValidation.disableSubmitButton();
     popupChangeAvatar.openPopup();
   });
 
   openModalTravelButton.addEventListener("click", () => {
-    formTravel.reset();
     formTravelValidation.resetForm();
     formTravelValidation.disableSubmitButton();
   });
@@ -266,6 +261,7 @@ api.getUserInfo().then((userInfoApi) => {
     formUserInfoValidation.enableSubmitButton();
     userName.value = getUserInfo.userName;
     userInfo.value = getUserInfo.profInfo;
+    popupUserFormSubmit.openPopup();
   });
   modalWithImage.setEventListeners();
   popupUserFormSubmit.setEventListeners();
