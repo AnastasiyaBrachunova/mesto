@@ -15,6 +15,21 @@ export default class Api {
       .catch((err) =>
         console.log("Ошибка" , err));
     }
+    
+    setInitialCard(name, link) {
+      return this._fetch(`/cards`, {
+        method: `POST`,
+        body: JSON.stringify({
+          name: name,
+          link: link
+        })
+      })
+      .then((res) => {
+        if (res.ok) {
+          return Promise.resolve(res.json());
+        }
+      })
+    }
 
     getAllData() {
       return Promise.all([this.getUserInfo(), this.getInitialCards()]);
@@ -47,15 +62,7 @@ export default class Api {
       });
     }
 
-    setInitialCard(name, link) {
-      return this._fetch(`/cards`, {
-        method: `POST`,
-        body: JSON.stringify({
-          name: name,
-          link: link
-        })
-      });
-    }
+
 
     delInitialCards(del) {
       return this._fetch(`/cards/${del}`, {

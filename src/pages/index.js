@@ -98,10 +98,7 @@ api.getUserInfo().then((userInfoApi) => {
       api
         .setInitialCard(formData.name, formData.link)
         .then((res) => {
-          if (res) {
-            cardsContainer.innerHTML = "";
-            initialCardsPromise();
-          }
+         cardList.addItem(res)
           popupTravelFormSubmit.closePopup();
         })
         .catch((err) => {
@@ -189,9 +186,9 @@ api.getUserInfo().then((userInfoApi) => {
             api
               .remLikeCard(idCard)
               .then((res) => {
-                const likesArray = res.likes;
+                // const likesArray = res.likes;
                 card.cardLikeToggle();
-                card.counterLikes(likesArray.length);
+                card.counterLikes(res.likes.length);
               })
               .catch((err) => {
                 console.log(`Ошибка дизлайка ${err}`);
@@ -200,9 +197,9 @@ api.getUserInfo().then((userInfoApi) => {
             api
               .addLikeCard(idCard)
               .then((res) => {
-                const likesArray = res.likes;
+                // const likesArray = res.likes;
                 card.cardLikeToggle();
-                card.counterLikes(likesArray.length);
+                card.counterLikes(res.likes.length);
               })
               .catch((err) => {
                 console.log(`Ошибка лайка ${err}`);

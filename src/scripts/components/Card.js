@@ -55,12 +55,6 @@ export default class Card {
     return this._likes.some((like) => like._id === this._userId)
   }
 
-  cardDelete() { 
-    this._element.remove(); 
-    this._element = null; 
-  }
-
-
   _switchLike() {
     // переключатель лайков
     if (this.whoLikes()) {
@@ -84,6 +78,10 @@ export default class Card {
   cardLikeToggle() {
     this._buttonLike.classList.toggle("button-like_active");
     this.isLiked = !this.isLiked
+  }
+  cardDelete() { 
+    this._element.remove(); 
+    this._element = null; 
   }
 
   _swithTrashCan() {
