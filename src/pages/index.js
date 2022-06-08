@@ -97,7 +97,7 @@ function renderCard (item) {
             .remLikeCard(idCard)
             .then((res) => {
               // const likesArray = res.likes;
-              card.cardLikeToggle();
+              card.unSetCardLike();
               card.counterLikes(res.likes.length);
             })
             .catch((err) => {
@@ -108,7 +108,7 @@ function renderCard (item) {
             .addLikeCard(idCard)
             .then((res) => {
               // const likesArray = res.likes;
-              card.cardLikeToggle();
+              card.setCardLike();
               card.counterLikes(res.likes.length);
             })
             .catch((err) => {

@@ -59,12 +59,10 @@ export default class Card {
     // переключатель лайков
     if (this.whoLikes()) {
       // если кто-то лайкнул то актив
-      this._buttonLike.classList.add("button-like_active");
-      this.isLiked = true
+      this.setCardLike();
     } else {
       // иначе убрать
-      this._buttonLike.classList.remove("button-like_active");
-      this.isLiked = false
+      this.unSetCardLike();
 
     }
   }
@@ -74,11 +72,17 @@ export default class Card {
     this._likeСounter.textContent = likesLength;
 
   }
+  setCardLike() {
+    this._buttonLike.classList.add("button-like_active");
+    this.isLiked = true
 
-  cardLikeToggle() {
-    this._buttonLike.classList.toggle("button-like_active");
-    this.isLiked = !this.isLiked
   }
+
+  unSetCardLike() {
+    this._buttonLike.classList.remove("button-like_active");
+    this.isLiked = false
+  }
+
   cardDelete() { 
     this._element.remove(); 
     this._element = null; 
