@@ -76,12 +76,26 @@ const cardList = new Section(
   ".grid-gallery"
 );
 
-api.getAllData()
-  .then(([ userData, cardArray ]) => {
 
-    userId = userData._id;
-    cardList.renderItems(cardArray)
-})
+api.getAllData()
+.then(([ userData, cardArray ]) => {
+  //попадаем сюда, когда оба промиса будут выполнены, деструктурируем ответ
+  userId = userData._id;
+  cardList.renderItems(cardArray)    })
+.catch((err) => {
+  //попадаем сюда если один из промисов завершится ошибкой
+  console.log(`Ошибка запроса данных с сервера ${err}`);
+});
+
+api.getUserInfo().then((userInfoApi) => {
+  
+  inputUserInfo.setUserInfo({
+    userName: userInfoApi.name,
+    profInfo: userInfoApi.about,
+    avatar: userInfoApi.avatar,
+  });
+ 
+});
 
 
 function renderCard (item) {
@@ -97,7 +111,6 @@ function renderCard (item) {
           api
             .remLikeCard(idCard)
             .then((res) => {
-              // const likesArray = res.likes;
               card.unSetCardLike();
               card.counterLikes(res.likes.length);
             })
@@ -108,7 +121,6 @@ function renderCard (item) {
           api
             .addLikeCard(idCard)
             .then((res) => {
-              // const likesArray = res.likes;
               card.setCardLike();
               card.counterLikes(res.likes.length);
             })
@@ -120,7 +132,6 @@ function renderCard (item) {
       handleDeleteClick: (event) => {
         const idCard = card.getCardId();
         modalSubmitDelete.setSubmit((event) => {
-          // event.preventDefault();
           popupDelCard.setLoader(true);
           api
             .delInitialCards(idCard)
@@ -198,7 +209,6 @@ const popupChangeAvatar = new PopupWithForm({
           userName: userInfoApi.name,
           profInfo: userInfoApi.about,
           avatar: userInfoApi.avatar,
-          // userId: userInfoApi._id,
         });
         popupChangeAvatar.closePopup();
       })
@@ -213,30 +223,7 @@ const popupChangeAvatar = new PopupWithForm({
 
 
 
-api.getUserInfo().then((userInfoApi) => {
-  
-  const initialCardsPromise = () =>
-    api.getInitialCards().then((cardArray) => {
-      cardList.renderItems(cardArray);
-    });
 
- api.getAllData()
-    .then(() => {
-      //попадаем сюда, когда оба промиса будут выполнены, деструктурируем ответ
-      initialCardsPromise(cardList); //все данные получены, отрисовываем страницу
-    })
-    .catch((err) => {
-      //попадаем сюда если один из промисов завершится ошибкой
-      console.log(`Ошибка запроса данных с сервера ${err}`);
-    });
-
-  inputUserInfo.setUserInfo({
-    userName: userInfoApi.name,
-    profInfo: userInfoApi.about,
-    avatar: userInfoApi.avatar,
-  });
- 
-});
 
   //*************** УСТАНОВКА СЛУШАТЕЛЕЙ  *****************/
 
