@@ -94,14 +94,6 @@ api.getAllData()
   console.log(`Ошибка запроса данных с сервера ${err}`);
 });
 
-// api.getUserInfo().then((userInfoApi) => {
-//   inputUserInfo.setUserInfo({
-//     userName: userInfoApi.name,
-//     profInfo: userInfoApi.about,
-//     avatar: userInfoApi.avatar,
-//   });
-// });
-
 function renderCard (item) {
   const card = new Card(
     {
@@ -231,10 +223,6 @@ const popupChangeAvatar = new PopupWithForm({
 
 
   //*************** УСТАНОВКА СЛУШАТЕЛЕЙ  *****************/
-
-  openModalTravelButton.addEventListener("click", () => {
-    popupTravelFormSubmit.openPopup();
-  });
 
   avatarButton.addEventListener("click", () => {
     formChangeAvatarValidation.resetForm();
