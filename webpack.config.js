@@ -54,11 +54,11 @@ module.exports = {
           filename: "fonts/[name].[contenthash][ext]",
         },
       },
-      // {
-      //   test: /\.js$/,
-      //   loader: "babel-loader",
-      //   exclude: "/node_modules/",
-      // },
+      {
+        test: /\.js$/,
+        loader: "babel-loader",
+        exclude: "/node_modules/",
+      },
     ],
   },
   plugins: [

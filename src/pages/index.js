@@ -2,7 +2,7 @@ import "../pages/index.css";
 import Card from "../scripts/components/Card.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
-import PopupWithDelete from "../scripts/components/PopupWithDelete";
+import PopupWithDelete from "../scripts/components/PopupWithDelete.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 import Api from "../scripts/components/Api.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
